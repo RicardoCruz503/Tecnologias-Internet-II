@@ -1,0 +1,8 @@
+﻿/*style_Biblia_1*/
+/************************************************************/
+
+#livroBibl{
+	overflow:scroll;
+	width:600px; height:500px;
+	border:1px solid #000000;
+}

@@ -1,0 +1,35 @@
+.bordered-div{
+    border-style : solid;
+    border-width : 5px;
+    background-color : #cee6ed;
+}
+
+#master-div{
+    width: 50%;
+    height: 650px;
+    border-color : darkcyan;
+}
+
+#input-div{
+    border-color :dodgerblue;
+    height : 6%;   
+}
+
+#output-div { 
+    border-color : cornflowerblue;
+    height : 89.5%;
+    overflow-y : auto;
+    overflow-x : auto;
+}
+
+.margins{
+    margin-top : 3px;     
+    margin-right : 2px;
+    margin-left : 2px;
+}
+
+.span-radio {
+    font-family : "Verdana";
+    font-size : 20px;
+    color : darkslategrey;
+}

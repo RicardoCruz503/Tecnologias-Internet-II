@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+	<head>
+		<meta charset="utf-8" />
+		<title>Proj_Biblia_2 - Título</title>
+		<link rel="stylesheet" type="text/css" href="style_Biblia_2.css">
+		<script src="cod_Biblia_2.js"></script>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<td id="ctrlTest">
+					<input type="radio" name="tstm" checked="checked" onclick="defTestam(0)" />
+					<span class="etk1">OLD TESTAMENT</span>
+					<input type="radio" name="tstm" onclick="defTestam(1)"/>
+					<span class="etk1">NEW TESTAMENT</span>
+				</td>
+				<td id="nomeLivro" rowspan="2">Nome do Livro
+				</td>
+			</tr>
+			<tr>
+				<td id="ctrlLivro"></td>
+			</tr>
+			<tr>
+				<td id="ctrlCap">Botões Todos
+				</td>
+				<td id="txtCap"><div id="baseCapitulo"></div></td>
+			</tr>
+		</table>
+		<script>
+			inicBiblia();
+			identLivro(0, 0);
+			defTestam(0);
+			mostraCapituloBiblia(0, 0, 0);
+			botInic(0);
+		</script>
+	</body>
+</html>
+

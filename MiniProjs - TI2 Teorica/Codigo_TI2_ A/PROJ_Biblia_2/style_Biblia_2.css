@@ -1,0 +1,37 @@
+﻿/*style_Biblia_2*/
+/***********************************************************/
+h4{
+	font-family:arial; font-size:18px; color:#800000;
+	margin:10px 10px 10px 10px;
+}
+p{
+	line-height:15px; text-align:justify;
+	margin:0px 10px 10px 10px;
+}
+
+.botCap{
+	width:40px; height:21px;
+}
+.etk1{
+	font-family:arial narrow; font-size:12px; color:#800000;
+	font-weight:bold;
+}
+.num{
+	font-family:verdana; font-size:12px; color:#000000;
+	font-weight:bold;
+}
+.txt{
+	font-family:verdana; font-size:11px; color:#000080;
+}
+
+
+#baseCapitulo{
+	overflow:scroll;
+	width:500px; height:550px;
+}
+#ctrlCap{
+	width:240px; vertical-align:top; height:550px;
+}
+#txtCap{
+	vertical-align:top; height:550px;
+}

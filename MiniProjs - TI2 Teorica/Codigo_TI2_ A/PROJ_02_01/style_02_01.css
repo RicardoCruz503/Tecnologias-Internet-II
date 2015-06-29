@@ -1,0 +1,14 @@
+﻿/*style_02_01*/
+/*******************************************************/
+h1{font-family:arial; font-size:24px;}
+li{font-family:verdana; font-size:14px; font-weight:bold; color:#004080;}
+.tipoTitulo{font-family:verdana; font-size:16px; font-weight:bold; font-style:italic; color:#800000;}
+.tipoAutoria{font-family:arial; font-size:14px; font-weight:bold; font-style:normal; color:#0000A0;}
+.tipoEditora{font-family:arial narrow; font-size:12px; font-weight:normal; font-style:normal; color:#006000;}
+.tipoBarra{font-family:verdana; font-size:18px; font-weight:bold; font-style:normal; color:#808080;}
+
+.Cab1{font-family:arial; font-size:16px; color:#FFFFFF; background-color:#804020; border:1px solid #000000;}
+.celTitulo, .celAutoria, .celEditora {font-family:verdana; font-size:12px; color:#000000; background-color:#FFFF90; border:1px solid #000000;}
+.celTitulo{width:250px;}
+.celAutoria{width:190px;}
+.celEditora{width:150px;}

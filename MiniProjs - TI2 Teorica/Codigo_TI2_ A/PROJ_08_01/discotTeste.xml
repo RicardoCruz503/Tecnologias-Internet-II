@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<discoteca>
+
+	<cd>
+		<titulo>Jeff Beck 3-Pak - Blow By Blow / Wired / There and Back</titulo>
+		<autoria>Jeff Beck</autoria>
+		<editora>Sony/Columbia</editora>
+		<amazon url="www.amazon.com/Jeff-Beck-3-Pak-Wired-There/dp/B000002ABX" />
+		<capa imagMini="mini008.jpg" imagBig="big008.jpg" />
+		<conteudo disco="1">
+			<faixa num="1" ref="You Know What I Mean" /> 
+			<faixa num="2" ref="She´s a Woman" /> 
+			<faixa num="3" ref="Constipated Duck" />
+			<faixa num="4" ref="Air Blower" /> 
+			<faixa num="5" ref="Scatterbrain" /> 
+			<faixa num="6" ref="Cause We´ve Ended as Lovers" /> 
+			<faixa num="7" ref="Thelonious" /> 
+			<faixa num="8" ref="Freeway Jam" /> 
+			<faixa num="9" ref="Diamond Dust" /> 
+		</conteudo>
+		<conteudo disco="2">
+			<faixa num="1" ref="Led Boots" /> 
+			<faixa num="2" ref="Come Dancing" /> 
+			<faixa num="3" ref="Goodbye Pork Pie Hat" /> 
+			<faixa num="4" ref="Head for Backstage Pass" /> 
+			<faixa num="5" ref="Blue Wind" /> 
+			<faixa num="6" ref="Sophie" /> 
+			<faixa num="7" ref="Play With Me" /> 
+			<faixa num="8" ref="Love Is Green" /> 
+		</conteudo>
+		<conteudo disco="3">
+			<faixa num="1" ref="Star Cycle" /> 
+			<faixa num="2" ref="Too Much to Lose" /> 
+			<faixa num="3" ref="You Never Know" /> 
+			<faixa num="4" ref="The Pump" /> 
+			<faixa num="5" ref="El Becko" /> 
+			<faixa num="6" ref="The Golden Road" /> 
+			<faixa num="7" ref="Space Boogie" /> 
+			<faixa num="8" ref="The Final Peace" /> 
+		</conteudo>
+		<datalanc>
+			<dia>17</dia>  <mes>10</mes>  <ano>1995</ano>
+		</datalanc>
+	</cd>
+	
+	<cd titulo="Jeff Beck 3-Pak - Blow By Blow / Wired / There and Back" autoria="Jeff Beck" editora="Sony/Columbia" amazon="www.amazon.com/Jeff-Beck-3-Pak-Wired-There/dp/B000002ABX">
+		<datalanc dia="17" mes="10" ano="1995" />
+		<capa imagMini="mini008.jpg" imagBig="big008.jpg" />
+		<conteudos>
+			<conteudo disco="1">
+				<faixa num="1" ref="You Know What I Mean" /> 
+				<faixa num="2" ref="She´s a Woman" /> 
+				<faixa num="3" ref="Constipated Duck" />
+				<faixa num="4" ref="Air Blower" /> 
+				<faixa num="5" ref="Scatterbrain" /> 
+				<faixa num="6" ref="Cause We´ve Ended as Lovers" /> 
+				<faixa num="7" ref="Thelonious" /> 
+				<faixa num="8" ref="Freeway Jam" /> 
+				<faixa num="9" ref="Diamond Dust" /> 
+			</conteudo>
+			<conteudo disco="2">
+				<faixa num="1" ref="Led Boots" /> 
+				<faixa num="2" ref="Come Dancing" /> 
+				<faixa num="3" ref="Goodbye Pork Pie Hat" /> 
+				<faixa num="4" ref="Head for Backstage Pass" /> 
+				<faixa num="5" ref="Blue Wind" /> 
+				<faixa num="6" ref="Sophie" /> 
+				<faixa num="7" ref="Play With Me" /> 
+				<faixa num="8" ref="Love Is Green" /> 
+			</conteudo>
+			<conteudo disco="3">
+				<faixa num="1" ref="Star Cycle" /> 
+				<faixa num="2" ref="Too Much to Lose" /> 
+				<faixa num="3" ref="You Never Know" /> 
+				<faixa num="4" ref="The Pump" /> 
+				<faixa num="5" ref="El Becko" /> 
+				<faixa num="6" ref="The Golden Road" /> 
+				<faixa num="7" ref="Space Boogie" /> 
+				<faixa num="8" ref="The Final Peace" /> 
+			</conteudo>
+		</conteudos>
+	</cd>
+
+</discoteca>
