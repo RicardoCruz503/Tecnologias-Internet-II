@@ -2,6 +2,8 @@
     border-style : solid;
     border-width : 5px;
     background-color : #cee6ed;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 #master-div{
@@ -12,24 +14,36 @@
 
 #input-div{
     border-color :dodgerblue;
-    height : 6%;   
+    height : 7.5%;   
 }
 
 #output-div { 
     border-color : cornflowerblue;
-    height : 89.5%;
+    height : 91%;
     overflow-y : auto;
     overflow-x : auto;
 }
 
 .margins{
-    margin-top : 3px;     
-    margin-right : 2px;
-    margin-left : 2px;
+    margin-top : 0.5%;     
+    margin-right : 0.5%;
+    margin-left : 0.5%;
 }
 
 .span-radio {
     font-family : "Verdana";
     font-size : 20px;
     color : darkslategrey;
+    margin-right : 10px;
+}
+
+#inputText{
+    width:190%;
+    margin-left : 5%;   
+    margin-top:1%;
+}
+
+#inputBtn{
+    margin-left : 205%;   
+    margin-top:1%;
 }

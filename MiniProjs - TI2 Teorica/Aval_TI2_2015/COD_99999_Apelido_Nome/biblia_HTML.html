@@ -5,20 +5,33 @@
 		<title>Biblia do JSON</title>
 		<link rel="stylesheet" type="text/css" href="biblia_styles.css">
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
-		<script src="biblia_Cod.js"></script>
+		<script src="jquery-2.1.4.min.js"></script>
         <script src="Bible_JSON.js"></script>
+        <script src="biblia_Cod.js"></script>
 	</head>
 	<body>
 		<div id="master-div" class="bordered-div">
             <div id="input-div" class="bordered-div margins">
-                <input type="radio" id="radio-lexical">
-                <span class="span-radio">Lexical</span>
-                <input type="radio" id="radio-lexical">
-                <span class="span-radio">Restrita</span>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="radio" id="radio-restrita" name="radio-restrita" checked="true">
+                            <span class="span-radio" id="span-restrita">Restrita</span>
+                            <input type="radio" id="radio-lexical" name="radio-lexical">
+                            <span class="span-radio" id="span-lexical">Lexical</span>
+                        </td>
+                        <td>
+                             <input type="text" class="form-control" placeholder="Texto a procurar" id="inputText">
+                        </td>
+                        <td>     
+                            <button class="btn btn-default va-button" id="inputBtn">Pesquisar</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div id="output-div" class="bordered-div margins">
-            
             </div>
         </div>
+        <script>teste();</script>
     </body>
 </html>
