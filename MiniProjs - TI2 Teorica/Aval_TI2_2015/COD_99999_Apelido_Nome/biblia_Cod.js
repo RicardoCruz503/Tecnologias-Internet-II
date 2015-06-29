@@ -71,7 +71,8 @@ function numTotVerss(){
 }
 
 function pesquisar(){
-    var inputSearch = document.getElementById("inputText").value;
+    var inputSearch = $('#inputText').val();
+    console.log(inputSearch);
     if($("body").find("#radio-restrita").prop("checked")){
         var regex = new RegExp(inputSearch, "g"); 
     }
