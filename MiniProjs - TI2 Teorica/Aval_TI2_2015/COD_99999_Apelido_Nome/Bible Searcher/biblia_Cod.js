@@ -1,8 +1,8 @@
 //cod_Biblia_4
 //**************************************************************
 var bibleJSON=JSON.parse(JSON.stringify(biblia));
-var inputSearch, previousSearch;
-var searchRestrita, searchLexical;
+var inputSearch="", previousSearch="";
+var searchRestrita=[], searchLexical=[];
 //EXTRAÇÃO DOS DADOS JSON
 //Expressa o número de Testamentos
 function numTests(){
@@ -83,15 +83,18 @@ function pesquisar(){
         secondRegex = new RegExp(inputSearch, "g"); 
         restritaOrLexical ^= 1;
     }
-    console.log(restritaOrLexical);
-    $('#output-div').html(crawl(firstRegex,restritaOrLexical));
-    restritaOrLexical ^= 1;
-    crawl(secondRegex, restritaOrLexical);
-    console.log(restritaOrLexical);
+    var aux = crawl(firstRegex, secondRegex, restritaOrLexical);
+    $('#output-div').empty();
+    for(var i = 0; i < aux.length; i++){
+        $('#output-div').append(aux[i]);
+    }
+    
 }
 
-function crawl(regex, restritaOrLexical){
-    var codHTML="", txtVers, iTest, iLivro, iCap, iVers, nTests, nLivros, nCaps, auxArray, nVerss=0;
+function crawl(firstRegex, secondRegex, restritaOrLexical){
+    var txtVers, txtVersFinal, iTest, iLivro, iCap, iVers, nTests, nLivros, nCaps, auxArray, nVerss=0;
+    var firstcodHTML=[""], secondcodHTML = [""];
+    var firstIndex = 0, secondIndex = 0;
 	nTests=numTests();
 	for(iTest=0; iTest<nTests; iTest++){
 		nLivros=numLivrosTest(iTest);
@@ -100,23 +103,50 @@ function crawl(regex, restritaOrLexical){
 			for(iCap=0; iCap<nCaps; iCap++){
 				nVerss=numVerssCapLivroTest(iTest, iLivro, iCap);
                 for(iVers=0; iVers<nVerss; iVers++){
-                    regexArray = txtVersCapLivroTest(iTest, iLivro, iCap, iVers).match(regex);
+                    txtVers = txtVersCapLivroTest(iTest, iLivro, iCap, iVers);
+                    regexArray = txtVers.match(firstRegex);
                     if(regexArray!= null){
-                        txtVers = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), regex, regexArray)
-                        codHTML += '<p>' + refVers(iTest, iLivro, iCap, iVers, txtVers) + '</p>';
+                        txtVersFinal = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), firstRegex, regexArray);
+                        if(firstcodHTML[firstIndex].length > 1000){
+                            firstIndex++; 
+                            firstcodHTML.push('<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>');
+                        }
+                        else{
+                            firstcodHTML[firstIndex] += '<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>';
+                        }
+                        
+                    }
+                    regexArray = txtVers.match(secondRegex);
+                    if(regexArray!= null){
+                        txtVersFinal = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), secondRegex, regexArray);
+                        if(secondcodHTML[secondIndex].length > 1000){
+                            secondIndex++;
+                            secondcodHTML.push('<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>');
+                        }
+                        else{
+                            secondcodHTML[secondIndex] += '<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>';
+                        }
                     }
                 }
 			}
 		}
     }
+    var count = 0;
+    for(var i = 0; i< secondcodHTML.length; i++) {
+        count += secondcodHTML[i].length;
+    }
+    console.log("count = " + count);
     if(restritaOrLexical==0){
-        searchRestrita = codHTML;   
+        searchRestrita = firstcodHTML;
+        searchLexical = secondcodHTML;
     }
     else{
-        searchLexical = codHTML;   
+        searchLexical = firstcodHTML;
+        searchRestrita = secondcodHTML;
     }
-    
-    return codHTML;
+    console.log("Tamanho da variavel firstcodHTML:" + firstcodHTML.length);
+    console.log("Tamanho da variavel secondcodHTML:" + secondcodHTML.length);
+    return firstcodHTML;
 }
 
 function delimit(vers, regex, regexArray){
@@ -138,11 +168,17 @@ function decision(){
         pesquisar();
         return;
     }
-    if($("#radio-restrita").prop("checked")){   
-        $('#output-div').html(searchRestrita);   
+    if($("#radio-restrita").prop("checked")){  
+        $('#output-div').empty(); 
+        for(var i = 0; i < searchRestrita.length; i++){
+            $('#output-div').append(searchRestrita[i]);
+        }  
     }
     else{
-        $('#output-div').html(searchLexical);      
+        $('#output-div').empty();
+        for(var i = 0; i < searchLexical.length; i++){
+            $('#output-div').append(searchLexical[i]);
+        }
     }
     return;
 }
@@ -171,11 +207,11 @@ $(document).ready(function () {
     });
     
     $('#inputText').keyup(function(e){
-    if(e.keyCode == 13) //ENTER
-    {
-        decision();
-    }
-});
+        if(e.keyCode == 13) //ENTER
+        {
+            decision();
+        }
+    });
 });
 
 
