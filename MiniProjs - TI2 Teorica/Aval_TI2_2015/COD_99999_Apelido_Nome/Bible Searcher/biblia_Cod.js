@@ -1,7 +1,8 @@
 //cod_Biblia_4
 //**************************************************************
 var bibleJSON=JSON.parse(JSON.stringify(biblia));
-
+var inputSearch, previousSearch;
+var searchRestrita, searchLexical;
 //EXTRAÇÃO DOS DADOS JSON
 //Expressa o número de Testamentos
 function numTests(){
@@ -50,8 +51,8 @@ function txtVersCapLivroTest(iTest, iLivro, iCap, iVers){
 
 
 //Epressa a referência dum versículo
-function refVers(iTest, iLivro, iCap, iVers){
-	return nomeLivroTest(iTest, iLivro)+' '+(iCap+1)+':'+(iVers+1) + txtVersCapLivroTest(iTest, iLivro, iCap, iVers);
+function refVers(iTest, iLivro, iCap, iVers, versTxt){
+	return '<b class="colored">' + nomeLivroTest(iTest, iLivro)+' '+(iCap+1)+':'+(iVers+1) + '</b> - ' + versTxt;
 }
 
 //Expressa o número total de versículos
@@ -71,31 +72,79 @@ function numTotVerss(){
 }
 
 function pesquisar(){
-    var inputSearch = $('#inputText').val();
-    console.log(inputSearch);
-    if($("body").find("#radio-restrita").prop("checked")){
-        var regex = new RegExp(inputSearch, "g"); 
+    var firstRegex, secondRegex;
+    var restritaOrLexical = 0; //false para restrita e true para lexical
+    if($("#radio-restrita").prop("checked")){
+        firstRegex = new RegExp(inputSearch, "g");
+        secondRegex = new RegExp(inputSearch, "gi");
     }
-    else if($("body").find("#radio-lexical").prop("checked")){
-        var regex = new RegExp(inputSearch, "gi"); 
+    else{
+        firstRegex = new RegExp(inputSearch, "gi"); 
+        secondRegex = new RegExp(inputSearch, "g"); 
+        restritaOrLexical ^= 1;
     }
-    var iTest, iLivro, iCap, iVers, nTests, nLivros, nCaps, nVerss=0;
+    console.log(restritaOrLexical);
+    $('#output-div').html(crawl(firstRegex,restritaOrLexical));
+    restritaOrLexical ^= 1;
+    crawl(secondRegex, restritaOrLexical);
+    console.log(restritaOrLexical);
+}
+
+function crawl(regex, restritaOrLexical){
+    var codHTML="", txtVers, iTest, iLivro, iCap, iVers, nTests, nLivros, nCaps, auxArray, nVerss=0;
 	nTests=numTests();
 	for(iTest=0; iTest<nTests; iTest++){
 		nLivros=numLivrosTest(iTest);
 		for(iLivro=0; iLivro<nLivros; iLivro++){
 			nCaps=numCapsLivroTest(iTest, iLivro);
 			for(iCap=0; iCap<nCaps; iCap++){
-				nVerss+=numVerssCapLivroTest(iTest, iLivro, iCap);
+				nVerss=numVerssCapLivroTest(iTest, iLivro, iCap);
+                for(iVers=0; iVers<nVerss; iVers++){
+                    regexArray = txtVersCapLivroTest(iTest, iLivro, iCap, iVers).match(regex);
+                    if(regexArray!= null){
+                        txtVers = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), regex, regexArray)
+                        codHTML += '<p>' + refVers(iTest, iLivro, iCap, iVers, txtVers) + '</p>';
+                    }
+                }
 			}
 		}
-    }   
+    }
+    if(restritaOrLexical==0){
+        searchRestrita = codHTML;   
+    }
+    else{
+        searchLexical = codHTML;   
+    }
+    
+    return codHTML;
 }
 
-//OUTPUTS
-//testes genéricos
-function teste(){
-	document.write(refVers(0, 0, 16, 7));
+function delimit(vers, regex, regexArray){
+    var splitArray = vers.split(regex);
+    var output = "";
+    var j = 0;
+    for(var i = 0; i<splitArray.length; i++){
+        output+=splitArray[i];
+        if(regexArray[i]!=null){
+           output += '<b>' + regexArray[i] + '</b>';
+        }
+    }
+    return output;
+}
+
+function decision(){
+    if(inputSearch != previousSearch){
+        previousSearch = inputSearch;
+        pesquisar();
+        return;
+    }
+    if($("#radio-restrita").prop("checked")){   
+        $('#output-div').html(searchRestrita);   
+    }
+    else{
+        $('#output-div').html(searchLexical);      
+    }
+    return;
 }
 
 
@@ -114,8 +163,19 @@ $(document).ready(function () {
     });
     
     $('#inputBtn').click(function () {
-       pesquisar(); 
+       decision(); 
     });
+    
+     $('#inputText').on('input',function(e){
+        inputSearch = $('#inputText').val();
+    });
+    
+    $('#inputText').keyup(function(e){
+    if(e.keyCode == 13) //ENTER
+    {
+        decision();
+    }
+});
 });
 
 

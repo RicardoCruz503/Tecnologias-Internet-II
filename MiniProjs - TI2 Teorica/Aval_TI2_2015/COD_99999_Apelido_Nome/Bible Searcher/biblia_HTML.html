@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Biblia do JSON</title>
-		<link rel="stylesheet" type="text/css" href="biblia_styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/biblia_styles.css">
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 		<script src="jquery-2.1.4.min.js"></script>
         <script src="Bible_JSON.js"></script>
@@ -16,9 +16,9 @@
                     <tr>
                         <td>
                             <input type="radio" id="radio-restrita" name="radio-restrita" checked="true">
-                            <span class="span-radio" id="span-restrita">Restrita</span>
+                            <span class="span-radio" id="span-restrita">Restrita <img id="imgRestrita" src=""></span>
                             <input type="radio" id="radio-lexical" name="radio-lexical">
-                            <span class="span-radio" id="span-lexical">Lexical</span>
+                            <span class="span-radio" id="span-lexical">Lexical <img id="imgLexical" src=""></span>
                         </td>
                         <td>
                              <input type="text" class="form-control" placeholder="Texto a procurar" id="inputText">
@@ -32,6 +32,5 @@
             <div id="output-div" class="bordered-div margins">
             </div>
         </div>
-        <script>teste();</script>
     </body>
 </html>

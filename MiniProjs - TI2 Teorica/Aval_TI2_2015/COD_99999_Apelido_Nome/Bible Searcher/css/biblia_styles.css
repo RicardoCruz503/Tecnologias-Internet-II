@@ -7,14 +7,17 @@
 }
 
 #master-div{
-    width: 50%;
+    width: 55%;
     height: 650px;
     border-color : darkcyan;
+    margin: 0px auto;
+    margin-top: 10px;
 }
 
 #input-div{
     border-color :dodgerblue;
-    height : 7.5%;   
+    height : 7.5%;  
+    padding-left : 1px;
 }
 
 #output-div { 
@@ -22,6 +25,7 @@
     height : 91%;
     overflow-y : auto;
     overflow-x : auto;
+    padding : 10px;
 }
 
 .margins{
@@ -39,11 +43,15 @@
 
 #inputText{
     width:190%;
-    margin-left : 5%;   
+    margin-left : 3%;   
     margin-top:1%;
 }
 
 #inputBtn{
-    margin-left : 205%;   
+    margin-left : 203%;   
     margin-top:1%;
+}
+
+.colored{
+    color : darkblue;
 }
