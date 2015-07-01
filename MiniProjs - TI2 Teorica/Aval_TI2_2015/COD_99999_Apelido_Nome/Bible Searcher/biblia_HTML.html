@@ -3,35 +3,33 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Bible Searcher</title>
-		<link rel="stylesheet" type="text/css" href="./css/biblia_styles.css">
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/biblia_styles.css">
 		<script src="jquery-2.1.4.min.js"></script>
         <script src="Bible_JSON.js"></script>
         <script src="biblia_Cod.js"></script>
 	</head>
 	<body>
-		<div id="master-div" class="bordered-div">
-            <div id="input-div" class="bordered-div margins">
-                <table>
-                    <tr>
-                        <td>
-                            <input type="radio" id="radio-restrita" name="radio-restrita" checked="true">
-                            <span class="span-radio" id="span-restrita">Restrita <img id="imgRestrita" src=""></span>
-                            <input type="radio" id="radio-lexical" name="radio-lexical">
-                            <span class="span-radio" id="span-lexical">Lexical <img id="imgLexical" src=""></span>
-                        </td>
-                        <td>
-                             <input type="text" class="form-control" placeholder="Texto a procurar" id="inputText">
-                        </td>
-                        <td>     
-                            <button class="btn btn-default va-button" id="inputBtn">Pesquisar</button>
-                        </td>
-                    </tr>
-                </table>
+        <div id="time-div"><h5>Tempo de execução da pesquisa: </h5></div>
+            <div id="master-div" class="bordered-div">
+                <div id="input-div" class="bordered-div margins table">
+                            <div id="radioDiv" class="tablecell">
+                                <input type="radio" id="radio-restrita" name="radio-restrita" checked="true">
+                                <span class="span-radio" id="span-restrita">Restrita <img id="imgRestrita" src=""></span>
+                                <input type="radio" id="radio-lexical" name="radio-lexical">
+                                <span class="span-radio" id="span-lexical">Lexical <img id="imgLexical" src=""></span>
+                            </div>
+                            <div id="textDiv" class="tablecell">
+                                 <input type="text" class="form-control" placeholder="Texto a procurar" id="inputText">
+                            </div>
+                            <div id="btnDiv" class="tablecell">     
+                                <button class="btn btn-default va-button" id="inputBtn">Pesquisar</button>
+                            </div>
+                </div>
+                <div id="output-div" class="bordered-div margins">
+                    <span id="outputspan"></span>
+                </div>
             </div>
-            <div id="output-div" class="bordered-div margins">
-                <span id="outputspan"></span>
-            </div>
-        </div>
+          
     </body>
 </html>

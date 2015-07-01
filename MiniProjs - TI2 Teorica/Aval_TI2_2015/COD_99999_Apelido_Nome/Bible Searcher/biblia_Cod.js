@@ -57,6 +57,7 @@ function refVers(iTest, iLivro, iCap, iVers){
 //Expressa o número total de versículos
 
 function pesquisar(){
+    var start = new Date().getTime();
     var regex=null;
     var txtVers, txtVersFinal="", iTest=0, iLivro=0, iCap=0, iVers=0, nTests=0, nLivros=0, nCaps=0, nVerss=0;
     var codHTML="";
@@ -80,18 +81,24 @@ function pesquisar(){
                     regexArray = txtVers.match(regex);
                     if(regexArray!= null){
                         txtVersFinal = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), regex, regexArray);
-                        codHTML += '<p>' + refVers(iTest, iLivro, iCap, iVers) + txtVersFinal+ '</p>';
-                        
+                        codHTML += '<p>' + refVers(iTest, iLivro, iCap, iVers) + txtVersFinal+ '</p>';                        
                     }
                 }
 			}
 		}
     }
     $('#output-div').empty();
-    //for(var i = 0; i < codHTML.length; i++){
-        $('#output-div').append(codHTML);
-    //}
-    
+    $('#output-div').append(codHTML);
+    var end = new Date().getTime();
+    var time = end - start;
+    var timetype = "ms";
+    if(time > 1000){ 
+        time /= 1000; 
+        timetype = "s";
+    }
+    $("#time-div").html("<h5>Tempo de execução da pesquisa: " + time + " " + timetype + "</h5>");
+    $("#time-div").fadeTo(2000, 100);
+    $("#time-div").fadeTo(2000, 0);
 }
 
 function delimit(vers, regex, regexArray){
@@ -101,7 +108,7 @@ function delimit(vers, regex, regexArray){
     for(var i = 0; i<splitArray.length; i++){
         output+=splitArray[i];
         if(regexArray[i]!=null){
-           output += '<b>' + regexArray[i] + '</b>';
+           output += '<span class="bold">' + regexArray[i] + '</span class="bold">';
         }
     }
     return output;

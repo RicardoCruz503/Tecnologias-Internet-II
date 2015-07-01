@@ -1,62 +1,140 @@
 .bordered-div{
     border-style : solid;
     border-width : 5px;
-    background-color : #cee6ed;
+    background-image: url("../Imagens/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
     max-height: 100%;
     max-width: 100%;
 }
 
+body{
+    background-image: url("../Imagens/lel.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    background-size:cover;
+}
+
 #master-div{
-    width: 55%;
+    overflow:hidden;
+    width: 750px;
     height: 650px;
-    border-color : darkcyan;
+    border-color : #4F2E1B;
     margin: 0px auto;
     margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 2px;
 }
 
 #input-div{
-    border-color :dodgerblue;
-    height : 7.5%;  
-    padding-left : 1px;
+    border-color :darkgoldenrod;
+    border-width:3px;
+    height : 7.5%;
+    padding:2px;
 }
 
 #output-div { 
-    border-color : cornflowerblue;
-    height : 91%;
+    border-color : darkgoldenrod;
+    border-width:3px;
+    max-width: 100%;
+    height : 88.5%;
     overflow-y : auto;
     overflow-x : auto;
     padding : 10px;
 }
 
-.margins{
-    margin-top : 0.5%;     
-    margin-right : 0.5%;
-    margin-left : 0.5%;
-}
-
 .span-radio {
-    font-family : "Verdana";
-    font-size : 20px;
-    color : darkslategrey;
-    margin-right : 10px;
-}
-
-#inputText{
-    width:190%;
-    margin-left : 3%;   
-    margin-top:1%;
-}
-
-#inputBtn{
-    margin-left : 203%;   
-    margin-top:1%;
+    font-family: "Times New Roman";
+    font-variant: small-caps;
+    font-size: 20px;
+    font-weight: bold;
+    color : #333333;
+    margin-right : 1%;
 }
 
 .colored{
+    font-size: 22px;
     font-weight: bold;
-    color : darkblue;
+    color : #260E00;
 }
 
 .bold{
     font-weight: bold;   
 }
+
+.table{
+    display: table;   
+    float: left;
+}
+
+.tablecell{
+    display:table-cell;
+    float:left;
+}
+
+#radioDiv{
+    width: 40%;   
+}
+
+#textDiv{
+    width: 40%;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+}
+
+#inputBtn{
+    font-family: "Times New Roman";
+    font-variant: small-caps;
+    font-size: 20px;
+    font-weight: bold;
+    color:gold;
+    background-image: url("../Imagens/oldrock.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;   
+}
+
+#inputText{
+    font-family: "Times New Roman";
+    font-size: 20px;
+    color: black;
+    height: 42px; 
+    background: transparent;
+    border: none;
+}
+
+p{
+    font-family: "Times New Roman";
+    font-size: 20px;
+    color: black;
+}
+
+h5{
+    color:white;   
+}
+
+#time-div{
+    overflow: hidden;
+    width: 300px;
+    margin: 0px auto;
+    opacity: 0;
+}
+
+
+::-webkit-input-placeholder {
+    color:red;
+}
+
+::-moz-placeholder {
+    color:red;
+}
+
+::-ms-placeholder {
+    color:red;
+}
+
+::placeholder {
+    color:red;
+}
+
