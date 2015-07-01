@@ -1,8 +1,7 @@
 //cod_Biblia_4
 //**************************************************************
 var bibleJSON=JSON.parse(JSON.stringify(biblia));
-var inputSearch="", previousSearch="";
-var searchRestrita=[], searchLexical=[];
+var inputSearch="";
 //EXTRAÇÃO DOS DADOS JSON
 //Expressa o número de Testamentos
 function numTests(){
@@ -51,50 +50,24 @@ function txtVersCapLivroTest(iTest, iLivro, iCap, iVers){
 
 
 //Epressa a referência dum versículo
-function refVers(iTest, iLivro, iCap, iVers, versTxt){
-	return '<b class="colored">' + nomeLivroTest(iTest, iLivro)+' '+(iCap+1)+':'+(iVers+1) + '</b> - ' + versTxt;
+function refVers(iTest, iLivro, iCap, iVers){
+	return '<span class="colored">' + nomeLivroTest(iTest, iLivro)+' '+(iCap+1)+':'+(iVers+1) + '</span> - ';
 }
 
 //Expressa o número total de versículos
-function numTotVerss(){
-	var iTest, iLivro, iCap, iVers, nTests, nLivros, nCaps, nVerss=0;
-	nTests=numTests();
-	for(iTest=0; iTest<nTests; iTest++){
-		nLivros=numLivrosTest(iTest);
-		for(iLivro=0; iLivro<nLivros; iLivro++){
-			nCaps=numCapsLivroTest(iTest, iLivro);
-			for(iCap=0; iCap<nCaps; iCap++){
-				nVerss+=numVerssCapLivroTest(iTest, iLivro, iCap);
-			}
-		}
-	}
-	return nVerss;
-}
 
 function pesquisar(){
-    var firstRegex, secondRegex;
-    var restritaOrLexical = 0; //false para restrita e true para lexical
+    var regex=null;
+    var txtVers, txtVersFinal="", iTest=0, iLivro=0, iCap=0, iVers=0, nTests=0, nLivros=0, nCaps=0, nVerss=0;
+    var codHTML="";
+    
     if($("#radio-restrita").prop("checked")){
-        firstRegex = new RegExp(inputSearch, "g");
-        secondRegex = new RegExp(inputSearch, "gi");
+        regex = new RegExp(inputSearch, "g");
     }
     else{
-        firstRegex = new RegExp(inputSearch, "gi"); 
-        secondRegex = new RegExp(inputSearch, "g"); 
-        restritaOrLexical ^= 1;
-    }
-    var aux = crawl(firstRegex, secondRegex, restritaOrLexical);
-    $('#output-div').empty();
-    for(var i = 0; i < aux.length; i++){
-        $('#output-div').append(aux[i]);
+        regex = new RegExp(inputSearch, "gi"); 
     }
     
-}
-
-function crawl(firstRegex, secondRegex, restritaOrLexical){
-    var txtVers, txtVersFinal, iTest, iLivro, iCap, iVers, nTests, nLivros, nCaps, auxArray, nVerss=0;
-    var firstcodHTML=[""], secondcodHTML = [""];
-    var firstIndex = 0, secondIndex = 0;
 	nTests=numTests();
 	for(iTest=0; iTest<nTests; iTest++){
 		nLivros=numLivrosTest(iTest);
@@ -104,49 +77,21 @@ function crawl(firstRegex, secondRegex, restritaOrLexical){
 				nVerss=numVerssCapLivroTest(iTest, iLivro, iCap);
                 for(iVers=0; iVers<nVerss; iVers++){
                     txtVers = txtVersCapLivroTest(iTest, iLivro, iCap, iVers);
-                    regexArray = txtVers.match(firstRegex);
+                    regexArray = txtVers.match(regex);
                     if(regexArray!= null){
-                        txtVersFinal = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), firstRegex, regexArray);
-                        if(firstcodHTML[firstIndex].length > 1000){
-                            firstIndex++; 
-                            firstcodHTML.push('<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>');
-                        }
-                        else{
-                            firstcodHTML[firstIndex] += '<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>';
-                        }
+                        txtVersFinal = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), regex, regexArray);
+                        codHTML += '<p>' + refVers(iTest, iLivro, iCap, iVers) + txtVersFinal+ '</p>';
                         
-                    }
-                    regexArray = txtVers.match(secondRegex);
-                    if(regexArray!= null){
-                        txtVersFinal = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), secondRegex, regexArray);
-                        if(secondcodHTML[secondIndex].length > 1000){
-                            secondIndex++;
-                            secondcodHTML.push('<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>');
-                        }
-                        else{
-                            secondcodHTML[secondIndex] += '<p>' + refVers(iTest, iLivro, iCap, iVers, txtVersFinal) + '</p>';
-                        }
                     }
                 }
 			}
 		}
     }
-    var count = 0;
-    for(var i = 0; i< secondcodHTML.length; i++) {
-        count += secondcodHTML[i].length;
-    }
-    console.log("count = " + count);
-    if(restritaOrLexical==0){
-        searchRestrita = firstcodHTML;
-        searchLexical = secondcodHTML;
-    }
-    else{
-        searchLexical = firstcodHTML;
-        searchRestrita = secondcodHTML;
-    }
-    console.log("Tamanho da variavel firstcodHTML:" + firstcodHTML.length);
-    console.log("Tamanho da variavel secondcodHTML:" + secondcodHTML.length);
-    return firstcodHTML;
+    $('#output-div').empty();
+    //for(var i = 0; i < codHTML.length; i++){
+        $('#output-div').append(codHTML);
+    //}
+    
 }
 
 function delimit(vers, regex, regexArray){
@@ -161,28 +106,6 @@ function delimit(vers, regex, regexArray){
     }
     return output;
 }
-
-function decision(){
-    if(inputSearch != previousSearch){
-        previousSearch = inputSearch;
-        pesquisar();
-        return;
-    }
-    if($("#radio-restrita").prop("checked")){  
-        $('#output-div').empty(); 
-        for(var i = 0; i < searchRestrita.length; i++){
-            $('#output-div').append(searchRestrita[i]);
-        }  
-    }
-    else{
-        $('#output-div').empty();
-        for(var i = 0; i < searchLexical.length; i++){
-            $('#output-div').append(searchLexical[i]);
-        }
-    }
-    return;
-}
-
 
 //jquery events
 $(document).ready(function () {
@@ -199,7 +122,7 @@ $(document).ready(function () {
     });
     
     $('#inputBtn').click(function () {
-       decision(); 
+       pesquisar(); 
     });
     
      $('#inputText').on('input',function(e){
@@ -209,7 +132,7 @@ $(document).ready(function () {
     $('#inputText').keyup(function(e){
         if(e.keyCode == 13) //ENTER
         {
-            decision();
+            pesquisar();
         }
     });
 });

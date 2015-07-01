@@ -53,5 +53,10 @@
 }
 
 .colored{
+    font-weight: bold;
     color : darkblue;
+}
+
+.bold{
+    font-weight: bold;   
 }
