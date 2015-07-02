@@ -1,0 +1,26 @@
+Hello everyone.
+So i'm currently making a college project in which at some point i need to load large ammounts os HTML into a div. I'm doing this like so
+
+    $('#output-div').html(codHTML);
+
+Note that the variable "codHTML" is the variable that contains the large ammounts of HTML
+
+The contents of the HTML code aren't much more then <span>, <b> and <p> and text that is retrived by a JSON search.
+
+Here's an example of how it looks:
+[enter link description here][1]
+
+My problem is that whenever the time comes that i load the html to the div, the page freezes for an extended period of time.
+I've investigate this and i can tell that the problem isn't on the JSON search nor it is when i inject the variable contents inside the div itself. The problem remains on the time the browsers take to actually display the results of that injection.
+
+So after extensive research i am sad to say that i have found zero solutions to reduce the page freeze time.
+
+If anyone knows how i can get around this delay, i would really apreciate if you told me.
+
+Thank you in advance.
+
+
+  
+
+
+  [1]: http://prntscr.com/7nwdhu

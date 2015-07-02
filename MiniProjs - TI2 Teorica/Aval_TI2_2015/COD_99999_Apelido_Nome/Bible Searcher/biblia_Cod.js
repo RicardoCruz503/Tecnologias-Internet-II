@@ -63,10 +63,10 @@ function pesquisar(){
     var codHTML="";
     
     if($("#radio-restrita").prop("checked")){
-        regex = new RegExp(inputSearch, "g");
+        regex = new RegExp(inputSearch.replace(/(\W)/g, "\\$1"), "g"); 
     }
     else{
-        regex = new RegExp(inputSearch, "gi"); 
+       regex = new RegExp(inputSearch.replace(/(\W)/g, "\\$1"), "gi"); 
     }
     
 	nTests=numTests();
@@ -81,14 +81,18 @@ function pesquisar(){
                     regexArray = txtVers.match(regex);
                     if(regexArray!= null){
                         txtVersFinal = delimit(txtVersCapLivroTest(iTest, iLivro, iCap, iVers), regex, regexArray);
-                        codHTML += '<p>' + refVers(iTest, iLivro, iCap, iVers) + txtVersFinal+ '</p>';                        
+                        codHTML += '<p>' + refVers(iTest, iLivro, iCap, iVers) + txtVersFinal+ '</p>';
                     }
                 }
 			}
 		}
     }
-    $('#output-div').empty();
-    $('#output-div').append(codHTML);
+    if(codHTML=="")
+    {
+       codHTML += '<p class="center">Não foram encontradas quaisquer ocurrencias da sua pesquisa</p>'
+    }
+    $('#output-div').html(codHTML);
+    
     var end = new Date().getTime();
     var time = end - start;
     var timetype = "ms";
@@ -96,9 +100,14 @@ function pesquisar(){
         time /= 1000; 
         timetype = "s";
     }
-    $("#time-div").html("<h5>Tempo de execução da pesquisa: " + time + " " + timetype + "</h5>");
+    displayInfo("<h5>Tempo de execução da pesquisa: " + time + " " + timetype + "</h5>");
+    
+}
+
+function displayInfo(text){
+    $("#time-div").html(text);
     $("#time-div").fadeTo(2000, 100);
-    $("#time-div").fadeTo(2000, 0);
+    $("#time-div").fadeTo(2000, 0);  
 }
 
 function delimit(vers, regex, regexArray){
@@ -108,7 +117,7 @@ function delimit(vers, regex, regexArray){
     for(var i = 0; i<splitArray.length; i++){
         output+=splitArray[i];
         if(regexArray[i]!=null){
-           output += '<span class="bold">' + regexArray[i] + '</span class="bold">';
+           output += '<b>' + regexArray[i] + '</b>';
         }
     }
     return output;
@@ -129,7 +138,16 @@ $(document).ready(function () {
     });
     
     $('#inputBtn').click(function () {
-       pesquisar(); 
+        var start = new Date().getTime();
+        
+        if($("#inputText").val()!=""){
+            pesquisar(); 
+        }
+        else{
+            displayInfo("<h5>Por favor introduza a palavra ou frase que deseja pesquisar</h5>");  
+        }
+        var time = new Date().getTime() - start;
+        console.log(time);
     });
     
      $('#inputText').on('input',function(e){
@@ -139,7 +157,12 @@ $(document).ready(function () {
     $('#inputText').keyup(function(e){
         if(e.keyCode == 13) //ENTER
         {
-            pesquisar();
+            if($("#inputText").val()!=""){
+                pesquisar(); 
+            }
+            else{
+                displayInfo("<h5>Por favor introduza a palavra ou frase que deseja pesquisar</h5>");  
+            }
         }
     });
 });

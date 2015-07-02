@@ -59,10 +59,6 @@ body{
     color : #260E00;
 }
 
-.bold{
-    font-weight: bold;   
-}
-
 .table{
     display: table;   
     float: left;
@@ -111,30 +107,25 @@ p{
 }
 
 h5{
-    color:white;   
+    color:white;
+    text-align: center;
 }
 
 #time-div{
     overflow: hidden;
-    width: 300px;
+    width: 750px;
     margin: 0px auto;
     opacity: 0;
 }
 
-
-::-webkit-input-placeholder {
-    color:red;
+#btnDiv{
+ margin-left: 1%;   
 }
 
-::-moz-placeholder {
-    color:red;
+#radioDiv{
+    margin-left: 1%;
 }
 
-::-ms-placeholder {
-    color:red;
+.center{
+    text-align:center;
 }
-
-::placeholder {
-    color:red;
-}
-
