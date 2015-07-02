@@ -86,7 +86,6 @@ function pesquisar(){
 			}
 		}
     }
-    console.log("done search");
     if(codHTML=="")
     {
        codHTML += '<p class="center">Não foram encontradas quaisquer ocurrencias da sua pesquisa</p>'
