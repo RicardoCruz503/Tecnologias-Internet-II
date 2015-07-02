@@ -17,7 +17,6 @@ body{
 }
 
 #master-div{
-    overflow:hidden;
     width: 750px;
     height: 650px;
     border-color : #4F2E1B;

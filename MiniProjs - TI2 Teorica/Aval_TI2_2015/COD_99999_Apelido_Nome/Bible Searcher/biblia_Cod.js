@@ -61,7 +61,6 @@ function pesquisar(){
     var regex=null;
     var txtVers, txtVersFinal="", iTest=0, iLivro=0, iCap=0, iVers=0, nTests=0, nLivros=0, nCaps=0, nVerss=0;
     var codHTML="";
-    
     if($("#radio-restrita").prop("checked")){
         regex = new RegExp(inputSearch.replace(/(\W)/g, "\\$1"), "g"); 
     }
@@ -87,6 +86,7 @@ function pesquisar(){
 			}
 		}
     }
+    console.log("done search");
     if(codHTML=="")
     {
        codHTML += '<p class="center">Não foram encontradas quaisquer ocurrencias da sua pesquisa</p>'
@@ -123,6 +123,15 @@ function delimit(vers, regex, regexArray){
     return output;
 }
 
+function decision(){
+    if($("#inputText").val()!=""){
+        pesquisar(); 
+    }
+    else{
+        displayInfo("<h5>Por favor introduza a palavra ou frase que deseja pesquisar</h5>");  
+    }
+}
+
 //jquery events
 $(document).ready(function () {
     $('#radio-restrita').change(function () {
@@ -138,16 +147,7 @@ $(document).ready(function () {
     });
     
     $('#inputBtn').click(function () {
-        var start = new Date().getTime();
-        
-        if($("#inputText").val()!=""){
-            pesquisar(); 
-        }
-        else{
-            displayInfo("<h5>Por favor introduza a palavra ou frase que deseja pesquisar</h5>");  
-        }
-        var time = new Date().getTime() - start;
-        console.log(time);
+        decision();
     });
     
      $('#inputText').on('input',function(e){
@@ -157,12 +157,7 @@ $(document).ready(function () {
     $('#inputText').keyup(function(e){
         if(e.keyCode == 13) //ENTER
         {
-            if($("#inputText").val()!=""){
-                pesquisar(); 
-            }
-            else{
-                displayInfo("<h5>Por favor introduza a palavra ou frase que deseja pesquisar</h5>");  
-            }
+            decision();
         }
     });
 });
