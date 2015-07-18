@@ -81,6 +81,7 @@ namespace VerticalculoWebsite.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+                    Roles.AddUserToRole(model.UserName, "Cliente");
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
