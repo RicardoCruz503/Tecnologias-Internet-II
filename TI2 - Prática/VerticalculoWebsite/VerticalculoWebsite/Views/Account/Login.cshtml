@@ -18,18 +18,22 @@
         <legend>Formolário de Inicio de Sessão</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
+                @Html.LabelFor(m => m.UserName, "Nome de Utilizador")
                 @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
+                <span style="font-size:13px">
+                    @Html.ValidationMessageFor(m => m.UserName, "Por favor insira o seu Nome de Utilizador")
+                </span>
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
+                @Html.LabelFor(m => m.Password, "Palavra-Passe")
                 @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
+                <span style="font-size:13px">
+                    @Html.ValidationMessageFor(m => m.Password, "Por favor insira a sua Palavra-Passe")
+                </span>
             </li>
             <li>
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox"})
                 @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
             </li>
         </ol>
         <input type="submit" value="Entrar" />
