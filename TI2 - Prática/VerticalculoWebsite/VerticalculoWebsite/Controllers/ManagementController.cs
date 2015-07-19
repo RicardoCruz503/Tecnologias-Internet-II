@@ -21,8 +21,10 @@ namespace VerticalculoWebsite.Controllers
             
             SelectList listRoles = new SelectList(Roles.GetAllRoles(), "Select a Role");
             DbContext db = new DbContext("DefaultConnection");
-            var list = db.Database.SqlQuery<String>("SELECT UserName FROM UserProfile");
-            ViewBag.Users = list;
+            string[] listUsernames = db.Database.SqlQuery<String>("SELECT UserName FROM UserProfile").ToArray();
+            int[] listUserids = db.Database.SqlQuery<Int32>("SELECT UserId FROM UserProfile").ToArray();
+            ViewBag.Usernames = listUsernames;
+            ViewBag.Userids = listUserids;
             ViewBag.Roles = listRoles;
 
 
