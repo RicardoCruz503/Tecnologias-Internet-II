@@ -28,10 +28,5 @@ namespace VerticalculoWebsite.Controllers
 
             return View();
         }
-
-        public ActionResult lel()
-        {
-            return View();
-        }
     }
 }
