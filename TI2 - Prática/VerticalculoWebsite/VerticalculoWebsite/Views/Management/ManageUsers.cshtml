@@ -20,7 +20,7 @@
                 <tr>
                     <td>@userIds[i]</td>
                     <td>@usernames[i]</td>
-                    <td>@Html.ActionLink("Editar", "Edit")   @Html.ActionLink("Apagar", "Delete")</td>
+                    <td>@Html.ActionLink("Editar", "Edit", "Management", new { username = usernames[i]}, null)   @Html.ActionLink("Apagar", "Delete", "Management", new { username = usernames[i]}, null)</td>
                 </tr>
             }
         }
