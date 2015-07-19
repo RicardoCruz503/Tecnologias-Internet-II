@@ -194,6 +194,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-VerticalculoWebsite-20150718163616.mdf" />
+    <Content Include="App_Data\aspnet-VerticalculoWebsite-20150718163616_log.ldf">
+      <DependentUpon>aspnet-VerticalculoWebsite-20150718163616.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -319,9 +323,7 @@
       <BrowseToURL>~/Management/ManageUsers</BrowseToURL>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
