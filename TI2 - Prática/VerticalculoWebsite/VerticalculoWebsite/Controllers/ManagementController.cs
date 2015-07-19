@@ -42,10 +42,6 @@ namespace VerticalculoWebsite.Controllers
 
         public ActionResult Delete(string username)
         {
-            if (WebSecurity.IsCurrentUser(username))
-            {
-                WebSecurity.Logout();
-            }
             Roles.RemoveUserFromRole(username, Roles.GetRolesForUser(username)[0]);
             ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(username); // deletes record from webpages_Membership table
             ((SimpleMembershipProvider)Membership.Provider).DeleteUser(username, true); // deletes record from UserProfile table

@@ -21,7 +21,7 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            if(Roles.IsUserInRole(WebSecurity.CurrentUserName, "Administrador")){
+                            @if(Roles.IsUserInRole(WebSecurity.CurrentUserName, "Administrador")){
                                 <li>@Html.ActionLink("Gerir Utilizadores", "ManageUsers", "Management")</li>
                             }
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
