@@ -1,0 +1,49 @@
+﻿@model VerticalculoWebsite.Models.LoginModel
+
+@{
+    ViewBag.Title = "Inicio de Sessão";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<section id="loginForm">
+<h2>Utilize uma conta local para iniciar Sessão</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formolário de Inicio de Sessão</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName, "Nome de Utilizador")
+                @Html.TextBoxFor(m => m.UserName)
+                <span style="font-size:13px">
+                    @Html.ValidationMessageFor(m => m.UserName, "Por favor insira o seu Nome de Utilizador")
+                </span>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password, "Palavra-Passe")
+                @Html.PasswordFor(m => m.Password)
+                <span style="font-size:13px">
+                    @Html.ValidationMessageFor(m => m.Password, "Por favor insira a sua Palavra-Passe")
+                </span>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox"})
+                @Html.CheckBoxFor(m => m.RememberMe)
+            </li>
+        </ol>
+        <input type="submit" value="Entrar" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Registe-se", "Register") se ainda não possui uma conta
+    </p>
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
