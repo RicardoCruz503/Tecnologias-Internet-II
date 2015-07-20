@@ -6,21 +6,11 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>UserProfile</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.UserName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.UserName)
-    </div>
-</fieldset>
+<h3>Tem a certeza que pretende apagar o Utilizador <b>@Html.DisplayFor(model => model.UserName)</b>?</h3>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <input type="submit" value="Apagar Utilizador" /> |
+        @Html.ActionLink("Voltar", "ManageUsers")
     </p>
 }

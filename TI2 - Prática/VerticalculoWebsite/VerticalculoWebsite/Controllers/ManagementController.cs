@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +15,7 @@ using WebMatrix.WebData;
 namespace VerticalculoWebsite.Controllers
 {
     [InitializeSimpleMembership]
+    [Authorize(Roles="Administrador")]
     public class ManagementController : Controller
     {
         private UsersContext db = new UsersContext();
@@ -24,44 +26,6 @@ namespace VerticalculoWebsite.Controllers
         public ActionResult ManageUsers()
         {
             return View(db.UserProfiles.ToList());
-        }
-
-        //
-        // GET: /Management/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            UserProfile userprofile = db.UserProfiles.Find(id);
-            if (userprofile == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userprofile);
-        }
-
-        //
-        // GET: /Management/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Management/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(UserProfile userprofile)
-        {
-            if (ModelState.IsValid)
-            {
-                db.UserProfiles.Add(userprofile);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(userprofile);
         }
 
         //
@@ -95,7 +59,7 @@ namespace VerticalculoWebsite.Controllers
             {
                 db.Entry(userprofile).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ManageUsers");
             }
             return View(userprofile);
         }
@@ -120,10 +84,18 @@ namespace VerticalculoWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserProfile userprofile = db.UserProfiles.Find(id);
-            db.UserProfiles.Remove(userprofile);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            UserProfile userprofile = db.UserProfiles.Find(id); //cri-o um userprofile atraves da buscar na bd pelo id fornecido
+            RolesContext rdb = new RolesContext(); //crio uma variavel que vai representar outra bd
+            webpages_UsersInRoles userinroles = rdb.webpages_UsersInRoles.FirstOrDefault(r => r.UserId.Equals(id)); //Diz respeito a tabela 
+            //dos UserRoles ou seja aquela que faz a ligação entre os users e os roles
+            //aqui crio uma relação que ira dizer respeito ao primeiro caso que ela encontrar que corresponde a
+            //r => r.UserId.Equals(Id) isto é a expressao que vai procurar na bd UsersInRoles por um caso cujo UserID seja igual ao Id
+            //fornecido
+            rdb.webpages_UsersInRoles.Remove(userinroles); //removo da tabela UsersInRoles o tal caso
+            rdb.SaveChanges(); //guardo as alterações
+            db.UserProfiles.Remove(userprofile); //removo o userprofile da tabela UserProfiles
+            db.SaveChanges(); //guardo alterações
+            return RedirectToAction("ManageUsers"); //fim
         }
 
         protected override void Dispose(bool disposing)

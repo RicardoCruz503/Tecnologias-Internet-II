@@ -10,12 +10,15 @@
 namespace VerticalculoWebsite.Models
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.SqlClient;
     
-    public partial class Entities1 : DbContext
+    public partial class RolesContext : DbContext
     {
-        public Entities1()
+        public RolesContext()
             : base("name=Entities1")
         {
         }
@@ -27,5 +30,6 @@ namespace VerticalculoWebsite.Models
     
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
         public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
+
     }
 }

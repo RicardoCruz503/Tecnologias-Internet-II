@@ -23,5 +23,6 @@ namespace VerticalculoWebsite.Models
         public string RoleName { get; set; }
     
         public virtual ICollection<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
+
     }
 }
