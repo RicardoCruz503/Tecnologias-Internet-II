@@ -183,6 +183,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Classes\EditUserViewObject.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
@@ -191,6 +192,27 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\RoleModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoleModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoleModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\webpages_Roles.cs">
+      <DependentUpon>RoleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\webpages_UsersInRoles.cs">
+      <DependentUpon>RoleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +283,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <EntityDeploy Include="Models\RoleModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RoleModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\RoleModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RoleModel.edmx</DependentUpon>
+      <LastGenOutput>RoleModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\RoleModel.edmx.diagram">
+      <DependentUpon>RoleModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\RoleModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RoleModel.edmx</DependentUpon>
+      <LastGenOutput>RoleModel.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -281,6 +320,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\Website.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -315,9 +355,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Management\ManageUsers.cshtml">
-      <BrowseToURL>~/Management/ManageUsers</BrowseToURL>
-    </Content>
+    <Content Include="Views\Shared\NotAllowedError.cshtml" />
+    <Content Include="Views\View1.cshtml" />
+    <Content Include="Views\Management\ManageUsers.cshtml" />
+    <Content Include="Views\Management\Details.cshtml" />
+    <Content Include="Views\Management\Create.cshtml" />
+    <Content Include="Views\Management\Edit.cshtml" />
+    <Content Include="Views\Management\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

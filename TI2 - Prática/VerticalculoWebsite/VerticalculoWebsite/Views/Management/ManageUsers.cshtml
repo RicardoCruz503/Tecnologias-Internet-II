@@ -1,61 +1,41 @@
-﻿@{
+﻿@model IEnumerable<VerticalculoWebsite.Models.UserProfile>
+
+@{
     ViewBag.Title = "Gerir Utilizadores";
 }
-<h1> Gerir Utilizadores </h1>
-@using(Html.BeginForm("ManageUsers", "Management"))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Acoes</th>
-        </tr>
-        @{
-            int[] userIds = (int[])ViewBag.Userids;
-            string[] usernames = (string[])ViewBag.Usernames; 
-            for (int i = 0; i < userIds.Length; i++)
-            {
-                <tr>
-                    <td>@userIds[i]</td>
-                    <td>@usernames[i]</td>
-                    <td>@Html.ActionLink("Editar", "Edit", "Management", new { username = usernames[i]}, null)   @Html.ActionLink("Apagar", "Delete", "Management", new { username = usernames[i]}, null)</td>
-                </tr>
-            }
-        }
-    </table>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Username
+        </th>
+        <th>
+            Acoes
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+        </td>
+    </tr>
 }
-<h3>Definir Tipo de Utilizador</h3>
 
-@using (Html.BeginForm("SetRoleForUser", "Management"))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <p>
-        Username : 
-        <select name="userList">
-            @foreach (string item in ViewBag.Usernames)
-            {
-
-                <option value="@item">
-                    @item
-                </option>
-            }
-        </select>
-
-        Role: <select name="roleList">
-            @foreach (SelectListItem item in ViewBag.Roles)
-            {
-                <option value="@item.Value">
-                    @item.Text
-                </option>
-            }
-        </select>
-       
-
-    </p>
-
-    <input type="submit" value="Guardar" />
-}
+</table>

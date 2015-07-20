@@ -9,7 +9,7 @@
 </hgroup>
 
 <section id="loginForm">
-<h2>Utilize uma conta local para iniciar Sessão</h2>
+<h3>Utilize uma conta local para iniciar Sessão</h3>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -19,6 +19,7 @@
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName, "Nome de Utilizador")
+                <br/>
                 @Html.TextBoxFor(m => m.UserName)
                 <span style="font-size:13px">
                     @Html.ValidationMessageFor(m => m.UserName, "Por favor insira o seu Nome de Utilizador")
@@ -26,6 +27,7 @@
             </li>
             <li>
                 @Html.LabelFor(m => m.Password, "Palavra-Passe")
+                <br />
                 @Html.PasswordFor(m => m.Password)
                 <span style="font-size:13px">
                     @Html.ValidationMessageFor(m => m.Password, "Por favor insira a sua Palavra-Passe")
