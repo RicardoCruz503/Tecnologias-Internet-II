@@ -25,7 +25,7 @@ namespace VerticalculoWebsite.Controllers
 
         public ActionResult ManageUsers()
         {
-            return View(db.UserProfiles.ToList());
+            return View(new ShowUsersObject(db.UserProfiles.ToArray(), rdb.webpages_UsersInRoles.ToArray()));
         }
 
         //

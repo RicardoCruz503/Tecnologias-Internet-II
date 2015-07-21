@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VerticalculoWebsite.Models.UserProfile>
+﻿@model VerticalculoWebsite.Classes.ShowUsersObject
 
 @{
     ViewBag.Title = "Gerir Utilizadores";
@@ -18,23 +18,32 @@
             Username
         </th>
         <th>
+            Tipo Utilizador
+        </th>
+        <th>
             Acoes
         </th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit","Management", new { id=item.UserId }, null) |
-            @Html.ActionLink("Delete", "Delete", "Management", new { id=item.UserId },null)
-        </td>
-    </tr>
-}
+    @{
+        
+        for (int i = 0; i < Model.UserProfiles.Length; i++ )
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.UserProfiles[i].UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.UserProfiles[i].UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Roles[i])
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Management", new { id = Model.UserProfiles[i].UserId }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Management", new { id = Model.UserProfiles[i].UserId }, null)
+                </td>
+            </tr>
+        }
+      }
 
 </table>
