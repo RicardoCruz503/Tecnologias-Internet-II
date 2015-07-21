@@ -203,6 +203,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AvencasModel.cs" />
     <Compile Include="Models\NoticiasModel.cs" />
     <Compile Include="Models\RoleModel.Context.cs">
       <AutoGen>True</AutoGen>
