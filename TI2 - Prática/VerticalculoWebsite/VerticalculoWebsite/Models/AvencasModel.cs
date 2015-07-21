@@ -26,8 +26,11 @@ namespace VerticalculoWebsite.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int AvencaId { get; set; }
 
-        [ForeignKey("userprofile")]
-        public int UserId { get; set; }
+        [ForeignKey("userprofileClient")]
+        public int? ClientId { get; set; }
+
+        [ForeignKey("userprofileContab")]
+        public int? ContabId { get; set; }
 
         [Required]
         [StringLength(500, ErrorMessage = "A {0} tem de ter pelo menos {2} caracteres.", MinimumLength = 10)]
@@ -47,6 +50,7 @@ namespace VerticalculoWebsite.Models
         [DefaultValue(false)]
         public bool AvisoPagamento { get; set; }
 
-        public virtual UserProfile userprofile { get; set; }
+        public virtual UserProfile userprofileClient { get; set; }
+        public virtual UserProfile userprofileContab { get; set; }
     }
 }
