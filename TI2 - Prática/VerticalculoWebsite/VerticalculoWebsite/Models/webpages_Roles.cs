@@ -18,7 +18,7 @@ namespace VerticalculoWebsite.Models
         {
             this.webpages_UsersInRoles = new HashSet<webpages_UsersInRoles>();
         }
-    
+            
         public int RoleId { get; set; }
         public string RoleName { get; set; }
     

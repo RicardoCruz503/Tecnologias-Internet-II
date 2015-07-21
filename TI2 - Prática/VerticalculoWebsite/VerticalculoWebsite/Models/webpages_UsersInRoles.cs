@@ -14,6 +14,16 @@ namespace VerticalculoWebsite.Models
     
     public partial class webpages_UsersInRoles
     {
+        private RolesContext rdb = new RolesContext();
+        public webpages_UsersInRoles(int id, int userid)
+        {
+            this.RoleId = id;
+            this.UserId = userid;
+            this.webpages_Roles = rdb.webpages_Roles.Find(RoleId);
+        }
+
+        public webpages_UsersInRoles() { }
+
         public int UserId { get; set; }
         public int RoleId { get; set; }
     

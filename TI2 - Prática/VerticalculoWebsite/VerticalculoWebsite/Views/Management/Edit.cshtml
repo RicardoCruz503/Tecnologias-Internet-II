@@ -6,19 +6,20 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(new { UserName = @Model.userProfile.UserName}))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>UserProfile</legend>
-        
+        @Html.DisplayFor(model => model.userProfile.UserName)
         <div class="editor-label">
             @Html.LabelFor(model => model.userProfile.UserName, Model.userProfile.UserName)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.userActualRole, "Tipo de Utilizador: ")
-            @Html.DropDownListFor(model => model.allOtherRoles,new SelectList(Model.allOtherRoles))
+            @Html.DropDownListFor(model => model.allOtherRoles, new SelectList(Model.allOtherRoles))
             @Html.ValidationMessageFor(model => model.userProfile.UserName)
         </div>
         <br/>
