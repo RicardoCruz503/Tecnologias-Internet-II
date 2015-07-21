@@ -5,10 +5,25 @@
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (ViewBag.alert != null)
+{
+    @Html.Raw(ViewBag.alert);
+    ViewBag.alert = null;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <input name="searchName" type="text" />
+            <input type="submit" value="Procurar" />
+        </div>
+    </fieldset>
+}
 <table class="table table-hover table-striped table-bordered">
     <tr>
         <th>

@@ -28,23 +28,41 @@ namespace VerticalculoWebsite.Controllers
             return View(new ShowUsersObject(db.UserProfiles.ToArray(), rdb.webpages_UsersInRoles.ToArray()));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ManageUsers(string searchName)
+        {
+            UserProfile[] searchUserProfile = db.UserProfiles.Where(u => u.UserName.Contains(searchName)).ToArray();
+            List<webpages_UsersInRoles> list = new List<webpages_UsersInRoles>();
+            for (int i = 0; i < searchUserProfile.Length; i++)
+            {
+                int id = searchUserProfile[i].UserId;
+                list.Add(rdb.webpages_UsersInRoles.First(r => r.UserId.Equals(id)));
+            }
+                return View(new ShowUsersObject(searchUserProfile, list.ToArray()));
+        }
+
         //
         // GET: /Management/Edit/5
 
         public ActionResult Edit(int id =0)
         {
             UserProfile userprofile = db.UserProfiles.Find(id);
-            //webpages_Roles allOtherRoles = db.Roles.ToList();
             string role = Roles.GetRolesForUser(userprofile.UserName)[0];
-            List<String> list = Roles.GetAllRoles().ToList();
-            list.Remove(role);
+            List<String> list = new List<String>();
+            list.Add(role);
+            List<String> auxlist = Roles.GetAllRoles().ToList();
+            auxlist.Remove(role);
+            foreach (string str in auxlist)
+            {
+                list.Add(str);
+            }
 
             if (userprofile == null)
             {
                 return HttpNotFound();
             }
 
-            
             return View(new EditUserViewObject(role, list, userprofile));
         }
 
@@ -55,16 +73,36 @@ namespace VerticalculoWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(string UserName, string allOtherRoles)
         {
-            if (ModelState.IsValid)
+            bool exception = false;
+            try
             {
                 UserProfile userprofile = db.UserProfiles.First(u => u.UserName.Equals(UserName));
                 int roleid = rdb.webpages_UsersInRoles.First(r => r.UserId.Equals(userprofile.UserId)).RoleId;
                 string rolename = rdb.webpages_Roles.Find(roleid).RoleName;
-                Roles.RemoveUserFromRole(UserName, rolename);
-                Roles.AddUserToRole(UserName, allOtherRoles);
-                return RedirectToAction("ManageUsers");
+                if (ModelState.IsValid && !rolename.Equals(allOtherRoles))
+                {
+                    Roles.RemoveUserFromRole(UserName, rolename);
+                    Roles.AddUserToRole(UserName, allOtherRoles);
+                }
             }
-            return View(UserName);
+            catch (Exception ex)
+            {
+                exception = true;
+                ViewBag.alert = "<div id=\"myalert\" class=\"alert alert-danger fade in alert-class\">" +
+                "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                "<strong>Erro!</strong>Ocorreu um erro ao tentar Editar o Utilizador" +
+                "</div>";
+            }
+            finally
+            {
+                if (exception) { 
+                    ViewBag.alert = "<div id=\"myalert\" class=\"alert alert-success fade in alert-class\">" +
+                    "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                    "<strong>Success!</strong>O utilizador foi editado com sucesso!" +
+                    "</div>";
+                }
+            }
+            return RedirectToAction("ManageUsers");
         }
 
         //
@@ -112,10 +150,13 @@ namespace VerticalculoWebsite.Controllers
             }
             finally
             {
-                ViewBag.alert = "<div id=\"myalert\" class=\"alert alert-success fade in alert-class\">" +
-                "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
-                "<strong>Success!</strong>O utilizador foi apagado com sucesso!" +
-                "</div>";
+                if (exception)
+                {
+                    ViewBag.alert = "<div id=\"myalert\" class=\"alert alert-success fade in alert-class\">" +
+                    "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                    "<strong>Success!</strong>O utilizador foi apagado com sucesso!" +
+                    "</div>";
+                }
             }
 
             return RedirectToAction("ManageUsers"); //fim
