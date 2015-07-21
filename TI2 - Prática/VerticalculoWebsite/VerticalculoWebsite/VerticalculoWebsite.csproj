@@ -193,6 +193,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507210221388_InitialCreate.cs" />
+    <Compile Include="Migrations\201507210221388_InitialCreate.Designer.cs">
+      <DependentUpon>201507210221388_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507211434415_NoticiasProfileChange.cs" />
+    <Compile Include="Migrations\201507211434415_NoticiasProfileChange.Designer.cs">
+      <DependentUpon>201507211434415_NoticiasProfileChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\NoticiasModel.cs" />
     <Compile Include="Models\RoleModel.Context.cs">
@@ -290,6 +299,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RoleModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\verticalculo-logo.png" />
     <Content Include="Models\RoleModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RoleModel.edmx</DependentUpon>
@@ -364,7 +374,6 @@
     <Content Include="Views\Management\Edit.cshtml" />
     <Content Include="Views\Management\Delete.cshtml" />
     <Content Include="Views\Noticias\ManageNoticias.cshtml" />
-    <Content Include="Views\Noticias\Details.cshtml" />
     <Content Include="Views\Noticias\Create.cshtml" />
     <Content Include="Views\Noticias\Edit.cshtml" />
     <Content Include="Views\Noticias\Delete.cshtml" />
@@ -378,6 +387,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201507210221388_InitialCreate.resx">
+      <DependentUpon>201507210221388_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507211434415_NoticiasProfileChange.resx">
+      <DependentUpon>201507211434415_NoticiasProfileChange.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

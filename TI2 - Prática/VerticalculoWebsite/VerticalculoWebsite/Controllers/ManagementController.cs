@@ -95,7 +95,7 @@ namespace VerticalculoWebsite.Controllers
             }
             finally
             {
-                if (exception) { 
+                if (!exception) { 
                     ViewBag.alert = "<div id=\"myalert\" class=\"alert alert-success fade in alert-class\">" +
                     "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                     "<strong>Success!</strong>O utilizador foi editado com sucesso!" +

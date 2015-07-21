@@ -9,6 +9,7 @@ using VerticalculoWebsite.Models;
 
 namespace VerticalculoWebsite.Controllers
 {
+    [Authorize(Roles="Administrador")]
     public class NoticiasController : Controller
     {
         private NoticiasContext db = new NoticiasContext();
@@ -19,6 +20,13 @@ namespace VerticalculoWebsite.Controllers
         public ActionResult ManageNoticias()
         {
             return View(db.NoticiasProfiles.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ManageNoticias(string searchName)
+        {
+            return View(db.NoticiasProfiles.Where(n => n.Titulo.Contains(searchName)).ToList());
         }
 
         public ActionResult Noticias()
@@ -52,13 +60,14 @@ namespace VerticalculoWebsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(NoticiasEntity noticiasentity)
+        public ActionResult Create(NoticiasEntity noticiasentity, DateTime data)
         {
             if (ModelState.IsValid)
             {
+                noticiasentity.data = data;
                 db.NoticiasProfiles.Add(noticiasentity);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ManageNoticias");
             }
 
             return RedirectToAction("ManageNoticias");
@@ -88,7 +97,7 @@ namespace VerticalculoWebsite.Controllers
             {
                 db.Entry(noticiasentity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ManageNoticias");
             }
             return View(noticiasentity);
         }
@@ -116,7 +125,7 @@ namespace VerticalculoWebsite.Controllers
             NoticiasEntity noticiasentity = db.NoticiasProfiles.Find(id);
             db.NoticiasProfiles.Remove(noticiasentity);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ManageNoticias");
         }
 
         protected override void Dispose(bool disposing)

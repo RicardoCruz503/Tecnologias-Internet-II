@@ -4,11 +4,24 @@
     ViewBag.Title = "Gerir Noticias";
 }
 
-<h2>Index</h2>
+<h2>Gerir Noticias</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset class="float-left">
+        <div class="float-left half-width">
+            <p>
+                @Html.ActionLink("Criar Noticia", "Create")
+            </p>
+        </div>
+        <div class="float-right">
+            <input name="searchName" type="text" />
+            <input type="submit" value="Procurar" />
+        </div>
+    </fieldset>
+}
 <table class="table table-hover table-bordered table-striped">
     <tr>
         <th>
@@ -20,6 +33,7 @@
         <th>
             Corpo da Noticia
         </th>
+        <th>Data de Publicacao</th>
         <th>
             Acoes
         </th>
@@ -33,12 +47,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Titulo)
         </td>
-        <td style="overflow:auto">
-            @Html.DisplayFor(modelItem => item.CorpoNoticia)
+        <td>
+            <div class="scrollable-in-td">@Html.DisplayFor(modelItem => item.CorpoNoticia)</div> 
+        </td>
+        <td>
+            @item.data.Date.ToString("d")
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.NoticiaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NoticiaId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.NoticiaId })
         </td>
     </tr>

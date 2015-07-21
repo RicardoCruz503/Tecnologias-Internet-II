@@ -6,6 +6,7 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/Site.css")
         @Styles.Render("~/Content/bootstrap.css")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/modernizr")
@@ -14,8 +15,10 @@
     <body>
         <header>
             <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Verticalculo", "Index", "Home")</p>
+                <div class="float-left logo-div">
+                    <a href='@Url.Action("MyAction", "MyController")'>
+                        <img id="logo" src='@Url.Content("~/Images/verticalculo-logo.png")' />
+                    </a>
                 </div>
                 <div class="float-right">
                     <section id="login">

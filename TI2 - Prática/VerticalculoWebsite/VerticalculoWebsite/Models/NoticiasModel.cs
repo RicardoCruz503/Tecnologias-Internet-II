@@ -31,5 +31,7 @@ namespace VerticalculoWebsite.Models
         [Required]
         [StringLength(5000, ErrorMessage = "A {0} tem de ter pelo menos {2} caracteres.", MinimumLength = 50)]
         public string CorpoNoticia { get; set; }
+        [Required]
+        public DateTime data { get; set; }
     }
 }

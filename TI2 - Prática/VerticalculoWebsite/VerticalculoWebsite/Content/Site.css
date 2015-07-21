@@ -6,6 +6,26 @@
     text-align: center;
 }
 
+#logo{
+    width:110px;
+    height: 80px;
+}
+
+.logo-div{
+
+}
+.half-width{
+    margin-right: 460px;
+}
+
+.scrollable-in-td{
+    overflow:auto;
+    height:40px;
+    max-height: 70px;
+    max-width:540px;
+    margin:0 auto;
+}
+
 html {
     background-color: #e2e2e2;
     margin: 0;

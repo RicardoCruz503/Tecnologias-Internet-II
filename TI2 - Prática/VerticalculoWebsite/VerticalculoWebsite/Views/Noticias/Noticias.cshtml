@@ -1,39 +1,10 @@
-﻿@model IEnumerable<VerticalculoWebsite.Models.NoticiasEntity>
+﻿@model VerticalculoWebsite.Models.NoticiasEntity
 
 @{
     ViewBag.Title = "Noticias";
 }
 
-<h2>Index</h2>
+<h1>Noticias</h1>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CorpoNoticia)
-        </th>
-        <th></th>
-    </tr>
+<h3></h3>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CorpoNoticia)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NoticiaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NoticiaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NoticiaId })
-        </td>
-    </tr>
-}
-
-</table>

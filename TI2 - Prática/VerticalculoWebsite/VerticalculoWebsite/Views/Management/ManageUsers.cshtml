@@ -10,17 +10,22 @@
     @Html.Raw(ViewBag.alert);
     ViewBag.alert = null;
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset>
         <div>
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
-            <input name="searchName" type="text" />
-            <input type="submit" value="Procurar" />
+            <div class="float-left half-width">
+                <p>
+                    @Html.ActionLink("Criar Noticia", "Create")
+                </p>
+            </div>
+            <div class="float-right">
+                <input name="searchName" type="text" />
+                <input type="submit" value="Procurar" />
+            </div>
         </div>
     </fieldset>
 }
