@@ -5,18 +5,19 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VerticalculoWebsite.Classes;
 using VerticalculoWebsite.Models;
 
 namespace VerticalculoWebsite.Controllers
 {
-    [Authorize(Roles="Administrador")]
+    [Authorize]
     public class NoticiasController : Controller
     {
         private NoticiasContext db = new NoticiasContext();
 
         //
         // GET: /Default1/
-
+        [Authorize(Roles = "Administrador")]
         public ActionResult ManageNoticias()
         {
             return View(db.NoticiasProfiles.ToList());
@@ -24,32 +25,23 @@ namespace VerticalculoWebsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult ManageNoticias(string searchName)
         {
             return View(db.NoticiasProfiles.Where(n => n.Titulo.Contains(searchName)).ToList());
         }
 
-        public ActionResult Noticias()
+        public ActionResult Noticias(int index=1)
         {
-            return View();
+            ViewBag.Index = index;
+            return View(db.NoticiasProfiles.ToArray().Reverse().ToArray()[index-1]);
         }
 
-        //
-        // GET: /Default1/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            NoticiasEntity noticiasentity = db.NoticiasProfiles.Find(id);
-            if (noticiasentity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(noticiasentity);
-        }
+        
 
         //
         // GET: /Default1/Create
-
+        [Authorize(Roles = "Administrador")]
         public ActionResult Create()
         {
             return View();
@@ -60,11 +52,13 @@ namespace VerticalculoWebsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Create(NoticiasEntity noticiasentity, DateTime data)
         {
             if (ModelState.IsValid)
             {
                 noticiasentity.data = data;
+                noticiasentity.CorpoNoticia = noticiasentity.CorpoNoticia.Replace("*b*", "<b>").Replace("*/b*", "</b>").Replace("*u*", "<u>").Replace("*/u*", "</u>").Replace("*p*", "<p>").Replace("*/p*", "</p>");
                 db.NoticiasProfiles.Add(noticiasentity);
                 db.SaveChanges();
                 return RedirectToAction("ManageNoticias");
@@ -76,7 +70,8 @@ namespace VerticalculoWebsite.Controllers
         //
         // GET: /Default1/Edit/5
 
-        public ActionResult Edit(int id = 0)
+        [Authorize(Roles = "Administrador")]
+        public ActionResult Edit(int id = 1)
         {
             NoticiasEntity noticiasentity = db.NoticiasProfiles.Find(id);
             if (noticiasentity == null)
@@ -91,6 +86,7 @@ namespace VerticalculoWebsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(NoticiasEntity noticiasentity)
         {
             if (ModelState.IsValid)
@@ -104,7 +100,7 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // GET: /Default1/Delete/5
-
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int id = 0)
         {
             NoticiasEntity noticiasentity = db.NoticiasProfiles.Find(id);
@@ -120,6 +116,7 @@ namespace VerticalculoWebsite.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult DeleteConfirmed(int id)
         {
             NoticiasEntity noticiasentity = db.NoticiasProfiles.Find(id);

@@ -4,60 +4,63 @@
     ViewBag.Title = "Gerir Noticias";
 }
 
-<h2>Gerir Noticias</h2>
+    <h2>Gerir Noticias</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <fieldset class="float-left">
-        <div class="float-left half-width">
-            <p>
-                @Html.ActionLink("Criar Noticia", "Create")
-            </p>
-        </div>
-        <div class="float-right">
-            <input name="searchName" type="text" />
-            <input type="submit" value="Procurar" />
-        </div>
-    </fieldset>
-}
-<table class="table table-hover table-bordered table-striped">
-    <tr>
-        <th>
-            Id
-        </th>
-        <th>
-            Titulo da Noticia
-        </th>
-        <th>
-            Corpo da Noticia
-        </th>
-        <th>Data de Publicacao</th>
-        <th>
-            Acoes
-        </th>
-    </tr>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset class="float-left">
+            <div class="float-left half-width">
+                <p>
+                    @Html.ActionLink("Criar Noticia", "Create")
+                </p>
+            </div>
+            <div class="float-right">
+                <input name="searchName" type="text" />
+                <input type="submit" value="Procurar" />
+            </div>
+        </fieldset>
+    }
+<div class="scrollable-master-div">
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Titulo da Noticia
+            </th>
+            <th>
+                Corpo da Noticia
+            </th>
+            <th>Data de Publicacao</th>
+            <th>
+                Acoes
+            </th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoticiaId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-            <div class="scrollable-in-td">@Html.DisplayFor(modelItem => item.CorpoNoticia)</div> 
-        </td>
-        <td>
-            @item.data.Date.ToString("d")
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NoticiaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NoticiaId })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoticiaId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    <div class="scrollable-in-td">@Html.DisplayFor(modelItem => item.CorpoNoticia)</div>
+                </td>
+                <td>
+                    @item.data.Date.ToString("d")
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.NoticiaId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.NoticiaId })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

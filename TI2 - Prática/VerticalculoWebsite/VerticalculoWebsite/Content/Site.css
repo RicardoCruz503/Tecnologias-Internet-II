@@ -7,8 +7,12 @@
 }
 
 #logo{
-    width:110px;
+    width:160px;
     height: 80px;
+}
+
+.colored-b{
+    color:#417F28;
 }
 
 .logo-div{
@@ -18,12 +22,26 @@
     margin-right: 460px;
 }
 
+.half-width-users{
+    margin-right: 440px;
+}
+
 .scrollable-in-td{
     overflow:auto;
     height:40px;
     max-height: 70px;
     max-width:540px;
     margin:0 auto;
+}
+
+.scrollable-master-div{
+    overflow-y:auto;
+    max-height:285px;
+    width:100%;
+}
+
+#Noticia-Titulo-div{
+    
 }
 
 html {

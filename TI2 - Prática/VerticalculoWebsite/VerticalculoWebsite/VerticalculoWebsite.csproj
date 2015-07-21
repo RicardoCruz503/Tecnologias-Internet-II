@@ -299,7 +299,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RoleModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Images\verticalculo-logo.png" />
+    <Content Include="Content\verticalculo-logo.png" />
     <Content Include="Models\RoleModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RoleModel.edmx</DependentUpon>

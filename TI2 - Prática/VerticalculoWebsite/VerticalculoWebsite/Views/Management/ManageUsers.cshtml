@@ -3,67 +3,63 @@
 @{
     ViewBag.Title = "Gerir Utilizadores";
 }
+    @if (ViewBag.alert != null)
+    {
+        @Html.Raw(ViewBag.alert);
+                                ViewBag.alert = null;
+    }
 
-<h2>Index</h2>
-@if (ViewBag.alert != null)
-{
-    @Html.Raw(ViewBag.alert);
-    ViewBag.alert = null;
-}
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <div>
-            <div class="float-left half-width">
-                <p>
-                    @Html.ActionLink("Criar Noticia", "Create")
-                </p>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset class="float-left">
+            <div class="float-left half-width-users">
+                <h2>Gerir Utilizadores</h2>
             </div>
             <div class="float-right">
                 <input name="searchName" type="text" />
                 <input type="submit" value="Procurar" />
             </div>
-        </div>
-    </fieldset>
-}
-<table class="table table-hover table-striped table-bordered">
-    <tr>
-        <th>
-            Id
-        </th>
-        <th>
-            Username
-        </th>
-        <th>
-            Tipo Utilizador
-        </th>
-        <th>
-            Acoes
-        </th>
-    </tr>
-    @{
-        
-        for (int i = 0; i < Model.UserProfiles.Length; i++ )
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.UserProfiles[i].UserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.UserProfiles[i].UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Roles[i])
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "Management", new { id = Model.UserProfiles[i].UserId }, null) |
-                    @Html.ActionLink("Delete", "Delete", "Management", new { id = Model.UserProfiles[i].UserId }, null)
-                </td>
-            </tr>
-        }
-      }
+        </fieldset>
+    }
+<div class="scrollable-master-div">
+    <table class="table table-hover table-striped table-bordered">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Nome de Utilizador
+            </th>
+            <th>
+                Tipo Utilizador
+            </th>
+            <th>
+                Acoes
+            </th>
+        </tr>
+        @{
 
-</table>
+            for (int i = 0; i < Model.UserProfiles.Length; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.UserProfiles[i].UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.UserProfiles[i].UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Roles[i])
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", "Management", new { id = Model.UserProfiles[i].UserId }, null) |
+                        @Html.ActionLink("Apagar", "Delete", "Management", new { id = Model.UserProfiles[i].UserId }, null)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>

@@ -6,5 +6,39 @@
 
 <h1>Noticias</h1>
 
-<h3></h3>
+<div id="Noticia-Titulo-div"><h3><u>@Html.DisplayFor(model => model.Titulo)</u></h3></div>
+<div id="Corpo-Noticia-div">@Html.Raw(Model.CorpoNoticia)</div>
+<div id="Data-Noticia-div">
+    @Model.data.ToString("d")
+</div>
+<br/>
+<div class="float-right">
+    @if (ViewBag.Index > 1)
+    {
+        int index = (int)ViewBag.Index - 1;
+        <b>@Html.ActionLink("Anterior", "Noticias", new { index = index })</b>
+    }
+    @{
+        int count = 0;
+        int[] result = { -1, -1, -1 };
+        for (int i = ViewBag.Index; i > 0 && count < 3; i--)
+        {
+            result[count] = i;
+            count++;
+        }
+        result = result.Reverse().ToArray();
+        for (int i = 0; i < result.Length; i++)
+        {
+            if (result[i] != -1)
+            {
+                <b>@Html.ActionLink(result[i].ToString(), "Noticias", new { index = result[i] })</b>
+            }
+        }
+    }
+    @if (ViewBag.Index < new VerticalculoWebsite.Models.NoticiasContext().NoticiasProfiles.ToArray().Length)
+    {
+        int index = (int)ViewBag.Index + 1;
+        <b>@Html.ActionLink("Proximo", "Noticias", new { index = index })</b>
+    }
+</div>
 

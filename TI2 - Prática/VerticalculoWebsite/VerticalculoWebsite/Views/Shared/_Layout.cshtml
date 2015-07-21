@@ -16,8 +16,8 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left logo-div">
-                    <a href='@Url.Action("MyAction", "MyController")'>
-                        <img id="logo" src='@Url.Content("~/Images/verticalculo-logo.png")' />
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img id="logo" src='@Url.Content("~/Content/verticalculo-logo.png")' />
                     </a>
                 </div>
                 <div class="float-right">
@@ -31,7 +31,6 @@
                                 <li>@Html.ActionLink("Gerir Utilizadores", "ManageUsers", "Management")</li>
                                 <li>@Html.ActionLink("Gerir Noticias", "ManageNoticias", "Noticias")</li>
                             }
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("Noticias", "Noticias", "Noticias")</li>
                             <li>@Html.ActionLink("Sobre nós", "About", "Home")</li>
                             <li>@Html.ActionLink("Contacte-nos", "Contact", "Home")</li>
