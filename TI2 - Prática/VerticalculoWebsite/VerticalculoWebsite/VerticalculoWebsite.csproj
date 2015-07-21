@@ -186,6 +186,7 @@
     <Compile Include="Classes\EditUserViewObject.cs" />
     <Compile Include="Classes\ShowUsersObject.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\NoticiasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -360,10 +361,14 @@
     <Content Include="Views\Shared\NotAllowedError.cshtml" />
     <Content Include="Views\View1.cshtml" />
     <Content Include="Views\Management\ManageUsers.cshtml" />
-    <Content Include="Views\Management\Details.cshtml" />
-    <Content Include="Views\Management\Create.cshtml" />
     <Content Include="Views\Management\Edit.cshtml" />
     <Content Include="Views\Management\Delete.cshtml" />
+    <Content Include="Views\Noticias\ManageNoticias.cshtml" />
+    <Content Include="Views\Noticias\Details.cshtml" />
+    <Content Include="Views\Noticias\Create.cshtml" />
+    <Content Include="Views\Noticias\Edit.cshtml" />
+    <Content Include="Views\Noticias\Delete.cshtml" />
+    <Content Include="Views\Noticias\Noticias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -26,9 +26,10 @@
                             
                             @if(Roles.IsUserInRole(WebSecurity.CurrentUserName, "Administrador")){
                                 <li>@Html.ActionLink("Gerir Utilizadores", "ManageUsers", "Management")</li>
+                                <li>@Html.ActionLink("Gerir Noticias", "ManageNoticias", "Noticias")</li>
                             }
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Noticias", "Noticias", "Home")</li>
+                            <li>@Html.ActionLink("Noticias", "Noticias", "Noticias")</li>
                             <li>@Html.ActionLink("Sobre nós", "About", "Home")</li>
                             <li>@Html.ActionLink("Contacte-nos", "Contact", "Home")</li>
                         </ul>

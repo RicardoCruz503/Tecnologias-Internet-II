@@ -1,0 +1,47 @@
+﻿@model IEnumerable<VerticalculoWebsite.Models.NoticiasEntity>
+
+@{
+    ViewBag.Title = "Gerir Noticias";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Titulo da Noticia
+        </th>
+        <th>
+            Corpo da Noticia
+        </th>
+        <th>
+            Acoes
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoticiaId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td style="overflow:auto">
+            @Html.DisplayFor(modelItem => item.CorpoNoticia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NoticiaId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NoticiaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.NoticiaId })
+        </td>
+    </tr>
+}
+
+</table>
