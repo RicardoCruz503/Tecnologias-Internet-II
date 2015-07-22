@@ -18,8 +18,7 @@ namespace VerticalculoWebsite.Controllers
         private UsersContext udb = new UsersContext();
         //
         // GET: /Avencas/
-        [Authorize(Roles="Administrador")]
-        [Authorize(Roles = "Contabilista")]
+        [Authorize(Roles="Administrador, Contabilista")]
         public ActionResult ManageAvencas()
         {
             var avencasentity = adb.AvencasEntity.Include(a => a.Cliente).Include(a => a.Contabilista);
@@ -45,8 +44,7 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // GET: /Avencas/Create
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Contabilista")]
+        [Authorize(Roles="Administrador, Contabilista")]
         public ActionResult Create()
         {
             int roleContab = rdb.webpages_Roles.First(r => r.RoleName.Equals("Contabilista")).RoleId;
@@ -65,8 +63,7 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // POST: /Avencas/Create
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Contabilista")]
+        [Authorize(Roles = "Administrador, Contabilista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AvencasEntity avencasentity)
@@ -85,8 +82,7 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // GET: /Avencas/Edit/5
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Contabilista")]
+        [Authorize(Roles = "Administrador, Contabilista")]
         public ActionResult Edit(int id = 0)
         {
             AvencasEntity avencasentity = adb.AvencasEntity.Find(id);
@@ -101,8 +97,7 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // POST: /Avencas/Edit/5
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Contabilista")]
+        [Authorize(Roles = "Administrador, Contabilista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AvencasEntity avencasentity)
@@ -120,8 +115,7 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // GET: /Avencas/Delete/5
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Contabilista")]
+        [Authorize(Roles = "Administrador, Contabilista")]
         public ActionResult Delete(int id = 0)
         {
             AvencasEntity avencasentity = adb.AvencasEntity.Find(id);
@@ -134,8 +128,7 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // POST: /Avencas/Delete/5
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Contabilista")]
+        [Authorize(Roles = "Administrador, Contabilista")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
