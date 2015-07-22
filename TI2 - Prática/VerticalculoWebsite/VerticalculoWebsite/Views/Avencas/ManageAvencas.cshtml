@@ -1,0 +1,97 @@
+﻿@model IEnumerable<VerticalculoWebsite.Models.AvencasEntity>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Gerir Avencas</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset class="float-left">
+        <div class="float-left half-width">
+            <p>
+                @Html.ActionLink("Criar Avenca", "Create")
+            </p>
+        </div>
+        <div class="float-right">
+            <input name="searchName" type="text" />
+            <input type="submit" value="Procurar" />
+        </div>
+    </fieldset>
+}
+<div class="scrollable-master-div">
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Contabilista
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                Data Avenca
+            </th>
+            <th>
+                Estado Pagamento
+            </th>
+            <th>
+                Data Pagamento
+            </th>
+            <th>
+                Aviso Pagamento
+            </th>
+            <th>Acoes</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contabilista.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataAvenca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoPagamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPagamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvisoPagamento)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

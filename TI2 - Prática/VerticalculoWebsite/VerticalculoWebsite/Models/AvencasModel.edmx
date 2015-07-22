@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AvencasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AvencasEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="ContabilistaId" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="DataAvenca" Type="datetime" Nullable="false" />
+          <Property Name="EstadoPagamento" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataPagamento" Type="datetime" />
+          <Property Name="AvisoPagamento" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__AvencasEn__Clien__4CA06362">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="AvencasEntity" Type="Self.AvencasEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AvencasEntity">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AvencasEn__Conta__4D94879B">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="AvencasEntity" Type="Self.AvencasEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AvencasEntity">
+              <PropertyRef Name="ContabilistaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AvencasModelStoreContainer">
+          <EntitySet Name="AvencasEntity" EntityType="Self.AvencasEntity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AvencasEn__Clien__4CA06362" Association="Self.FK__AvencasEn__Clien__4CA06362">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="AvencasEntity" EntitySet="AvencasEntity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AvencasEn__Conta__4D94879B" Association="Self.FK__AvencasEn__Conta__4D94879B">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="AvencasEntity" EntitySet="AvencasEntity" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AvencasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AvencasEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="ContabilistaId" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="DataAvenca" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstadoPagamento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DataPagamento" Type="DateTime" Precision="3" />
+          <Property Name="AvisoPagamento" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__AvencasEn__Clien__4CA06362" FromRole="AvencasEntity" ToRole="UserProfile" />
+          <NavigationProperty Name="Contabilista" Relationship="Self.FK__AvencasEn__Conta__4D94879B" FromRole="AvencasEntity" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfiles">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AvencasEntity" Relationship="Self.FK__AvencasEn__Clien__4CA06362" FromRole="UserProfile" ToRole="AvencasEntity" />
+          <NavigationProperty Name="AvencasEntity1" Relationship="Self.FK__AvencasEn__Conta__4D94879B" FromRole="UserProfile" ToRole="AvencasEntity" />
+        </EntityType>
+        <Association Name="FK__AvencasEn__Clien__4CA06362">
+          <End Role="UserProfile" Type="AvencasModel.UserProfiles" Multiplicity="1" />
+          <End Role="AvencasEntity" Type="Self.AvencasEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AvencasEntity">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AvencasEn__Conta__4D94879B">
+          <End Role="UserProfile" Type="AvencasModel.UserProfiles" Multiplicity="1" />
+          <End Role="AvencasEntity" Type="Self.AvencasEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AvencasEntity">
+              <PropertyRef Name="ContabilistaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AvencasConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AvencasEntity" EntityType="Self.AvencasEntity" />
+          <EntitySet Name="UserProfile" EntityType="AvencasModel.UserProfiles" />
+          <AssociationSet Name="FK__AvencasEn__Clien__4CA06362" Association="Self.FK__AvencasEn__Clien__4CA06362">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="AvencasEntity" EntitySet="AvencasEntity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AvencasEn__Conta__4D94879B" Association="Self.FK__AvencasEn__Conta__4D94879B">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="AvencasEntity" EntitySet="AvencasEntity" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AvencasModelStoreContainer" CdmEntityContainer="AvencasConnection">
+          <EntitySetMapping Name="AvencasEntity">
+            <EntityTypeMapping TypeName="AvencasModel.AvencasEntity">
+              <MappingFragment StoreEntitySet="AvencasEntity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="ContabilistaId" ColumnName="ContabilistaId" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="DataAvenca" ColumnName="DataAvenca" />
+                <ScalarProperty Name="EstadoPagamento" ColumnName="EstadoPagamento" />
+                <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
+                <ScalarProperty Name="AvisoPagamento" ColumnName="AvisoPagamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="AvencasModel.UserProfiles">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

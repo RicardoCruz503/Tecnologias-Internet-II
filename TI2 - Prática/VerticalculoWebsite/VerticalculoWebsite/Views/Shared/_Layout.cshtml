@@ -31,6 +31,10 @@
                                 <li>@Html.ActionLink("Gerir Utilizadores", "ManageUsers", "Management")</li>
                                 <li>@Html.ActionLink("Gerir Noticias", "ManageNoticias", "Noticias")</li>
                             }
+                            @if (Roles.IsUserInRole(WebSecurity.CurrentUserName, "Administrador") || Roles.IsUserInRole(WebSecurity.CurrentUserName, "Contabilista"))
+                            {
+                                <li>@Html.ActionLink("Gerir Avencas", "ManageAvencas", "Avencas")</li>
+                            }
                             <li>@Html.ActionLink("Noticias", "Noticias", "Noticias")</li>
                             <li>@Html.ActionLink("Sobre nós", "About", "Home")</li>
                             <li>@Html.ActionLink("Contacte-nos", "Contact", "Home")</li>

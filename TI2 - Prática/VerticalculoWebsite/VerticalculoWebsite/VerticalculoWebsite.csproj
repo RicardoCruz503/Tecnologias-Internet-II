@@ -186,6 +186,7 @@
     <Compile Include="Classes\EditUserViewObject.cs" />
     <Compile Include="Classes\ShowUsersObject.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AvencasController.cs" />
     <Compile Include="Controllers\NoticiasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
@@ -203,7 +204,24 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AvencasModel.cs" />
+    <Compile Include="Models\AvencasEntity.cs">
+      <DependentUpon>AvencasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AvencasModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvencasModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AvencasModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvencasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AvencasModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvencasModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\NoticiasModel.cs" />
     <Compile Include="Models\RoleModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -219,6 +237,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RoleModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserProfiles.cs">
+      <DependentUpon>AvencasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\webpages_Roles.cs">
       <DependentUpon>RoleModel.tt</DependentUpon>
@@ -314,6 +335,23 @@
       <DependentUpon>RoleModel.edmx</DependentUpon>
       <LastGenOutput>RoleModel.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="Models\AvencasModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AvencasModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AvencasModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AvencasModel.edmx</DependentUpon>
+      <LastGenOutput>AvencasModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AvencasModel.edmx.diagram">
+      <DependentUpon>AvencasModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\AvencasModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AvencasModel.edmx</DependentUpon>
+      <LastGenOutput>AvencasModel.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -379,6 +417,11 @@
     <Content Include="Views\Noticias\Edit.cshtml" />
     <Content Include="Views\Noticias\Delete.cshtml" />
     <Content Include="Views\Noticias\Noticias.cshtml" />
+    <Content Include="Views\Avencas\ManageAvencas.cshtml" />
+    <Content Include="Views\Avencas\Details.cshtml" />
+    <Content Include="Views\Avencas\Create.cshtml" />
+    <Content Include="Views\Avencas\Edit.cshtml" />
+    <Content Include="Views\Avencas\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
