@@ -417,11 +417,12 @@
     <Content Include="Views\Noticias\Edit.cshtml" />
     <Content Include="Views\Noticias\Delete.cshtml" />
     <Content Include="Views\Noticias\Noticias.cshtml" />
-    <Content Include="Views\Avencas\ManageAvencas.cshtml" />
+    <Content Include="Views\Avencas\CheckAvencas.cshtml" />
     <Content Include="Views\Avencas\Details.cshtml" />
     <Content Include="Views\Avencas\Create.cshtml" />
     <Content Include="Views\Avencas\Edit.cshtml" />
     <Content Include="Views\Avencas\Delete.cshtml" />
+    <Content Include="Views\Avencas\ManageAvencas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

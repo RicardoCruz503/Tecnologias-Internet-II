@@ -35,6 +35,9 @@
                             {
                                 <li>@Html.ActionLink("Gerir Avencas", "ManageAvencas", "Avencas")</li>
                             }
+                            @if(Roles.IsUserInRole(WebSecurity.CurrentUserName, "Cliente")){
+                                <li>@Html.ActionLink("Consultar Avencas", "CheckAvencas", "Avencas")</li>
+                            }
                             <li>@Html.ActionLink("Noticias", "Noticias", "Noticias")</li>
                             <li>@Html.ActionLink("Sobre nós", "About", "Home")</li>
                             <li>@Html.ActionLink("Contacte-nos", "Contact", "Home")</li>

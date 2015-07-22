@@ -10,7 +10,7 @@ using VerticalculoWebsite.Models;
 
 namespace VerticalculoWebsite.Controllers
 {
-    [Authorize]
+    
     public class NoticiasController : Controller
     {
         private NoticiasContext db = new NoticiasContext();

@@ -6,9 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VerticalculoWebsite.Models;
+using WebMatrix.WebData;
 
 namespace VerticalculoWebsite.Controllers
 {
+    [Authorize]
     public class AvencasController : Controller
     {
         private AvencasConnection adb = new AvencasConnection();
@@ -16,29 +18,35 @@ namespace VerticalculoWebsite.Controllers
         private UsersContext udb = new UsersContext();
         //
         // GET: /Avencas/
-
+        [Authorize(Roles="Administrador")]
+        [Authorize(Roles = "Contabilista")]
         public ActionResult ManageAvencas()
         {
             var avencasentity = adb.AvencasEntity.Include(a => a.Cliente).Include(a => a.Contabilista);
             return View(avencasentity.ToList());
         }
 
-        //
-        // GET: /Avencas/Details/5
-
-        public ActionResult Details(int id = 0)
+        [Authorize(Roles="Cliente")]
+        public ActionResult CheckAvencas()
         {
-            AvencasEntity avencasentity = adb.AvencasEntity.Find(id);
-            if (avencasentity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(avencasentity);
+            var avencasentity = adb.AvencasEntity.Where(a => a.ClienteId.Equals(WebSecurity.CurrentUserId)).Include(a => a.Cliente).Include(a => a.Contabilista);
+            return View(avencasentity.ToList());
         }
+
+        [Authorize(Roles = "Cliente")]
+        public ActionResult AskPayment(int id=0)
+        {
+            AvencasEntity avenca =  adb.AvencasEntity.Find(id);
+            avenca.AvisoPagamento = true;
+            adb.SaveChanges();
+            return RedirectToAction("CheckAvencas");
+        }
+
 
         //
         // GET: /Avencas/Create
-
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Contabilista")]
         public ActionResult Create()
         {
             int roleContab = rdb.webpages_Roles.First(r => r.RoleName.Equals("Contabilista")).RoleId;
@@ -57,7 +65,8 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // POST: /Avencas/Create
-
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Contabilista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AvencasEntity avencasentity)
@@ -76,7 +85,8 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // GET: /Avencas/Edit/5
-
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Contabilista")]
         public ActionResult Edit(int id = 0)
         {
             AvencasEntity avencasentity = adb.AvencasEntity.Find(id);
@@ -91,7 +101,8 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // POST: /Avencas/Edit/5
-
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Contabilista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AvencasEntity avencasentity)
@@ -109,7 +120,8 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // GET: /Avencas/Delete/5
-
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Contabilista")]
         public ActionResult Delete(int id = 0)
         {
             AvencasEntity avencasentity = adb.AvencasEntity.Find(id);
@@ -122,7 +134,8 @@ namespace VerticalculoWebsite.Controllers
 
         //
         // POST: /Avencas/Delete/5
-
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Contabilista")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
